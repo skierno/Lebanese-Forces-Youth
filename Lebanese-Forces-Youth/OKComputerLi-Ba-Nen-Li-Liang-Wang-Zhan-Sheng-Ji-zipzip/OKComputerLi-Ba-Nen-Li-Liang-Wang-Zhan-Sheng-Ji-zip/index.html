@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lebanese Forces Youth - Educational Platform</title>
+    <meta name="description" content="Educational platform for Lebanon's largest Christian political party youth movement">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cedar-red': '#DC143C',
+                        'cedar-green': '#228B22',
+                        'phoenix-gold': '#FFD700',
+                        'mediterranean-blue': '#1a2332'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #DC143C, #228B22);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .arabic-text {
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            direction: rtl;
+            text-align: right;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Desktop Navigation must override hidden class at md breakpoint */
+        @media (min-width: 768px) {
+            .hidden.md\:flex {
+                display: flex !important;
+            }
+        }
+        
+        /* Ensure navigation is always visible */
+        nav {
+            position: fixed !important;
+            top: 0 !important;
+            width: 100% !important;
+            z-index: 1000 !important;
+        }
+        
+        /* Ensure content doesn't hide behind nav */
+        body {
+            padding-top: 70px;
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">LF</span>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-red-600" id="siteTitle">Lebanese Forces Youth</h1>
+                        <p class="text-xs text-gray-500" id="siteSubtitle">Educational Platform</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-red-600 font-medium" id="navHome">Home</a>
+                    <a href="timeline.html" class="text-gray-600 hover:text-red-600" id="navTimeline">Timeline</a>
+                    <a href="comparison.html" class="text-gray-600 hover:text-red-600" id="navComparison">Comparison</a>
+                    <a href="news.html" class="text-gray-600 hover:text-red-600" id="navNews">News</a>
+                    <a href="join.html" class="text-gray-600 hover:text-red-600" id="navJoin">Join</a>
+                    <a href="/admin" class="text-gray-600 hover:text-red-600 flex items-center space-x-1" id="navAdmin">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Admin</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Language Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
+                        <span id="currentLang">English</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
+            <div class="p-4">
+                <a href="index.html" class="block py-2 text-red-600 font-medium" id="mobileHome">Home</a>
+                <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileTimeline">Timeline</a>
+                <a href="comparison.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileComparison">Comparison</a>
+                <a href="news.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileNews">News</a>
+                <a href="join.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileJoin">Join</a>
+                <a href="/admin" class="block py-2 text-gray-600 hover:text-red-600 border-t mt-2 pt-2" id="mobileAdmin">Admin Panel</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 py-20 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-4xl text-red-600 font-bold">LF</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-6" id="mainTitle">
+                    Lebanese Forces <span class="text-yellow-300">Youth</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl mb-8 leading-relaxed" id="mainDescription">
+                    Educational platform for Lebanon's largest Christian political party youth movement - advocating for sovereignty, democracy, and a strong Lebanese state
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="timeline.html" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors">
+                        Explore Our History
+                    </a>
+                    <a href="comparison.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-red-600 transition-colors">
+                        Compare Parties
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-16">
+        <!-- Quick Access -->
+        <section class="max-w-7xl mx-auto px-4 mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Learn About Lebanese Forces</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Comprehensive educational resources about Lebanon's largest Christian political party
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Timeline Card -->
+                <a href="timeline.html" class="card-hover bg-gray-50 p-6 rounded-xl block">
+                    <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">Historical Timeline</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
+                        Complete history from 1976 formation through present day, including all major wars and political developments.
+                    </p>
+                    <span class="text-red-600 font-semibold text-sm">View Timeline →</span>
+                </a>
+                
+                <!-- Comparison Card -->
+                <a href="comparison.html" class="card-hover bg-gray-50 p-6 rounded-xl block">
+                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">Party Comparison</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
+                        Compare Lebanese Forces with other major Lebanese political parties across ideology and policies.
+                    </p>
+                    <span class="text-red-600 font-semibold text-sm">Compare Parties →</span>
+                </a>
+                
+                <!-- News Card -->
+                <a href="news.html" class="card-hover bg-gray-50 p-6 rounded-xl block">
+                    <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">News & Resources</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
+                        Stay updated with current political developments and access educational materials.
+                    </p>
+                    <span class="text-red-600 font-semibold text-sm">View News →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Key Events -->
+        <section class="max-w-7xl mx-auto px-4 mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Key Historical Events</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Important milestones in Lebanese Forces history
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">1976 - Formation</h3>
+                    <p class="text-gray-600 text-sm mb-4">Bashir Gemayel unifies Christian militias into the Lebanese Forces during the Lebanese Civil War.</p>
+                    <span class="text-xs text-gray-500">Beirut, Lebanon</span>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">1982 - Bashir Elected President</h3>
+                    <p class="text-gray-600 text-sm mb-4">Bashir Gemayel elected President of Lebanon, representing peak of LF political influence.</p>
+                    <span class="text-xs text-gray-500">Beirut, Lebanon</span>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">1986 - Samir Geagea Leadership</h3>
+                    <p class="text-gray-600 text-sm mb-4">Samir Geagea assumes leadership after internal power struggles, beginning long-term leadership.</p>
+                    <span class="text-xs text-gray-500">Lebanon</span>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold text-red-600 mb-3">2005 - Cedar Revolution</h3>
+                    <p class="text-gray-600 text-sm mb-4">Samir Geagea released from prison after 11 years. LF re-legalized and re-emerges as major political force.</p>
+                    <span class="text-xs text-gray-500">Beirut, Lebanon</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="max-w-4xl mx-auto px-4 text-center mb-16">
+            <h2 class="text-3xl font-bold text-red-600 mb-6">
+                Ready to Learn More?
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Explore our comprehensive educational resources and join the movement for a sovereign Lebanon.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="join.html" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors">
+                    Join Lebanese Forces Youth
+                </a>
+                <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all">
+                    Follow Our Instagram
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">LF</span>
+                </div>
+                <h3 class="text-lg font-semibold">Lebanese Forces Youth - Educational Platform</h3>
+            </div>
+            <p class="text-gray-300 mb-4 text-sm">
+                Educational platform for understanding Lebanese politics and the role of the Lebanese Forces Youth movement
+            </p>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
+                    Follow on Instagram
+                </a>
+            </div>
+            <p class="text-xs text-gray-400">
+                © 2025 Lebanese Forces Youth Educational Platform. Created for educational purposes.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Config Loader Script -->
+    <script src="config-loader.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Language toggle
+        const langToggle = document.getElementById('langToggle');
+        const currentLang = document.getElementById('currentLang');
+        
+        langToggle.addEventListener('click', function() {
+            const isEnglish = currentLang.textContent === 'English';
+            currentLang.textContent = isEnglish ? 'العربية' : 'English';
+            
+            // Toggle text direction
+            document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
+            document.documentElement.lang = isEnglish ? 'ar' : 'en';
+            
+            // Show coming soon message for Arabic
+            if (isEnglish) {
+                alert('Arabic version coming soon! / النسخة العربية قريباً!');
+            }
+        });
+    </script>
+</body>
+</html>

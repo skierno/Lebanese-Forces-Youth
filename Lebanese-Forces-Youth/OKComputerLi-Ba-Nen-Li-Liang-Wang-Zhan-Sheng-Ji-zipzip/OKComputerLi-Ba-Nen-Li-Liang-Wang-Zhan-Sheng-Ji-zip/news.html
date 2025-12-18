@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Educational Resources - Lebanese Forces Youth</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cedar-red': '#DC143C',
+                        'cedar-green': '#228B22',
+                        'phoenix-gold': '#FFD700',
+                        'mediterranean-blue': '#1a2332',
+                        'sandstone': '#F5F5DC',
+                        'navy': '#1a2332',
+                        'gold': '#c9a96e',
+                        'teal': '#4a6b6b',
+                        'charcoal': '#2c3e50'
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Desktop Navigation must override hidden class at md breakpoint */
+        @media (min-width: 768px) {
+            .hidden.md\:flex {
+                display: flex !important;
+            }
+        }
+        
+        /* Ensure navigation is always visible */
+        nav {
+            position: fixed !important;
+            top: 0 !important;
+            width: 100% !important;
+            z-index: 1000 !important;
+        }
+        
+        /* Ensure content doesn't hide behind nav */
+        body {
+            padding-top: 70px;
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .news-bg {
+            background: linear-gradient(135deg, rgba(26, 35, 50, 0.9), rgba(74, 107, 107, 0.7)), 
+                        url('resources/news-hero.png') center/cover;
+            min-height: 60vh;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        
+        .news-card {
+            transition: all 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .resource-card {
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: #1a2332;
+            color: white;
+        }
+        
+        .bookmark-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .bookmark-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .bookmark-btn.bookmarked {
+            color: #c9a96e;
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background: #f3f4f6;
+        }
+        
+        .quiz-option.selected {
+            background: #1a2332;
+            color: white;
+        }
+        
+        .quiz-option.correct {
+            background: #10b981;
+            color: white;
+        }
+        
+        .quiz-option.incorrect {
+            background: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-body">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">LF</span>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-red-600">Lebanese Forces Youth</h1>
+                        <p class="text-xs text-gray-500">Educational Platform</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-red-600">Home</a>
+                    <a href="timeline.html" class="text-gray-600 hover:text-red-600">Timeline</a>
+                    <a href="comparison.html" class="text-gray-600 hover:text-red-600">Comparison</a>
+                    <a href="news.html" class="text-red-600 font-medium">News</a>
+                    <a href="join.html" class="text-gray-600 hover:text-red-600">Join</a>
+                    <a href="/admin" class="text-gray-600 hover:text-red-600 flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Admin</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Language Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
+                        <span id="currentLang">English</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
+            <div class="p-4">
+                <a href="index.html" class="block py-2 text-gray-600 hover:text-red-600">Home</a>
+                <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600">Timeline</a>
+                <a href="comparison.html" class="block py-2 text-gray-600 hover:text-red-600">Comparison</a>
+                <a href="news.html" class="block py-2 text-red-600 font-medium">News</a>
+                <a href="join.html" class="block py-2 text-gray-600 hover:text-red-600">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="news-bg flex items-center justify-center text-white relative overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-gradient-to-br from-navy/70 to-teal/50"></div>
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center py-20">
+            <h1 class="font-display text-5xl md:text-6xl font-bold mb-6 reveal" id="newsHeroTitle">
+                News & Educational Resources
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed reveal" id="newsHeroText">
+                Stay informed with current political developments and access comprehensive educational materials
+            </p>
+        </div>
+    </section>
+
+    <!-- News Dashboard Controls -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 reveal">
+                <!-- News Categories -->
+                <div class="flex bg-gray-100 rounded-lg p-1">
+                    <button class="filter-btn active px-6 py-3 rounded-md font-medium transition-all" data-category="all" id="allNewsFilter">
+                        All News
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-md font-medium transition-all" data-category="political" id="politicalNewsFilter">
+                        Political
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-md font-medium transition-all" data-category="economic" id="economicNewsFilter">
+                        Economic
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-md font-medium transition-all" data-category="international" id="internationalNewsFilter">
+                        International
+                    </button>
+                </div>
+                
+                <!-- Search and Sort -->
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <input type="text" id="newsSearch" placeholder="Search news..." 
+                               class="pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold transition-all">
+                        <svg class="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    
+                    <select id="newsSort" class="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-gold">
+                        <option value="date">Sort by Date</option>
+                        <option value="relevance">Sort by Relevance</option>
+                        <option value="category">Sort by Category</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="newsGrid">
+                <!-- Political News -->
+                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden reveal" data-category="political" data-date="2025-12-15">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">Political</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="political-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            LF Calls for Hezbollah Disarmament Following Recent Regional Developments
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            Lebanese Forces leader Samir Geagea reiterates calls for Hezbollah's disarmament, citing regional changes and the need for state monopoly on weapons.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>December 15, 2025</span>
+                            <span>5 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden reveal" data-category="political" data-date="2025-12-10">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">Political</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="political-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            Parliamentary Bloc Strategy for 2025 Legislative Session
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            LF parliamentary bloc outlines priorities for upcoming legislative session, focusing on economic reforms and security sector development.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>December 10, 2025</span>
+                            <span>3 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Economic News -->
+                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden reveal" data-category="economic" data-date="2025-12-12">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-teal text-white px-3 py-1 rounded-full text-sm font-medium">Economic</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="economic-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            LF Economic Recovery Plan Emphasizes Private Sector Growth
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            Lebanese Forces unveils comprehensive economic recovery plan focusing on private sector development and financial sector reform.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>December 12, 2025</span>
+                            <span>7 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- International News -->
+                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden reveal" data-category="international" data-date="2025-12-08">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-gold text-white px-3 py-1 rounded-full text-sm font-medium">International</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="international-1">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            LF Delegation Meets with International Partners on Regional Security
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            Lebanese Forces delegation holds high-level meetings with international partners to discuss regional security challenges and Lebanon's role.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>December 8, 2025</span>
+                            <span>4 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden reveal" data-category="political" data-date="2025-12-05">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">Political</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="political-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            LF Youth Wing Launches Political Education Initiative
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            Lebanese Forces youth organization announces new political education program to engage young Lebanese in democratic processes.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>December 5, 2025</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden reveal" data-category="economic" data-date="2025-12-03">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-teal text-white px-3 py-1 rounded-full text-sm font-medium">Economic</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="economic-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            LF Proposes Digital Transformation Strategy for Public Services
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            Lebanese Forces presents comprehensive digital transformation plan to modernize public services and reduce bureaucratic inefficiencies.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>December 3, 2025</span>
+                            <span>5 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Resources -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-bold text-navy mb-6" id="resourcesTitle">
+                    Educational Resources
+                </h2>
+                <p class="text-xl text-charcoal max-w-4xl mx-auto leading-relaxed" id="resourcesText">
+                    Comprehensive materials for understanding Lebanese politics and preparing for informed debates
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Key Documents -->
+                <div class="resource-card bg-gray-50 p-8 rounded-xl reveal">
+                    <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold text-navy mb-4" id="documentsTitle">Key Documents</h3>
+                    <p class="text-charcoal leading-relaxed mb-6">
+                        Access important political documents, speeches, and official statements from Lebanese Forces leadership.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>• Party Constitution and Bylaws</li>
+                        <li>• Samir Geagea Speeches Archive</li>
+                        <li>• Electoral Programs (2005-2022)</li>
+                        <li>• Parliamentary Statements</li>
+                    </ul>
+                    <button class="w-full bg-navy text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors" onclick="showComingSoon()">
+                        Browse Documents
+                    </button>
+                </div>
+                
+                <!-- Historical Analysis -->
+                <div class="resource-card bg-gray-50 p-8 rounded-xl reveal">
+                    <div class="w-16 h-16 bg-teal rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold text-navy mb-4" id="analysisTitle">Historical Analysis</h3>
+                    <p class="text-charcoal leading-relaxed mb-6">
+                        In-depth analysis of Lebanese Forces' evolution from militia to political party with academic perspectives.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>• Civil War Period Analysis</li>
+                        <li>• Post-Taif Transformation</li>
+                        <li>• Political Evolution Studies</li>
+                        <li>• Academic Research Papers</li>
+                    </ul>
+                    <button class="w-full bg-teal text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" onclick="showComingSoon()">
+                        View Analysis
+                    </button>
+                </div>
+                
+                <!-- Debate Preparation -->
+                <div class="resource-card bg-gray-50 p-8 rounded-xl reveal">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold text-navy mb-4" id="debateTitle">Debate Preparation</h3>
+                    <p class="text-charcoal leading-relaxed mb-6">
+                        Structured materials to help you prepare for political debates and discussions about Lebanese politics.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li>• Key Argument Points</li>
+                        <li>• Counter-Argument Strategies</li>
+                        <li>• Fact-Based Talking Points</li>
+                        <li>• Reference Sources</li>
+                    </ul>
+                    <button class="w-full bg-gold text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors" onclick="showComingSoon()">
+                        Start Preparing
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Quiz -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-bold text-navy mb-6" id="quizTitle">
+                    Test Your Knowledge
+                </h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto leading-relaxed" id="quizText">
+                    Interactive quiz to test your understanding of Lebanese Forces history and Lebanese politics
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg p-8 reveal" id="quizContainer">
+                <div id="quizQuestion" class="mb-8">
+                    <h3 class="font-display text-2xl font-semibold text-navy mb-6">
+                        Question 1: When was the Lebanese Forces founded?
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="quiz-option p-4 border border-gray-300 rounded-lg" data-answer="a">
+                            A) 1975 - At the start of the Lebanese Civil War
+                        </div>
+                        <div class="quiz-option p-4 border border-gray-300 rounded-lg" data-answer="b">
+                            B) 1976 - Through the unification of Christian militias
+                        </div>
+                        <div class="quiz-option p-4 border border-gray-300 rounded-lg" data-answer="c">
+                            C) 1982 - During the Israeli invasion of Lebanon
+                        </div>
+                        <div class="quiz-option p-4 border border-gray-300 rounded-lg" data-answer="d">
+                            D) 1986 - When Samir Geagea took leadership
+                        </div>
+                    </div>
+                    <button id="submitQuiz" class="mt-6 bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors">
+                        Submit Answer
+                    </button>
+                </div>
+                
+                <div id="quizResult" class="hidden">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display text-2xl font-semibold text-navy mb-4">Correct!</h3>
+                        <p class="text-charcoal leading-relaxed mb-6">
+                            The Lebanese Forces was founded in 1976 by Bashir Gemayel through the unification of various Christian militias during the Lebanese Civil War.
+                        </p>
+                        <button id="nextQuestion" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors">
+                            Next Question
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bookmarked Articles -->
+    <section class="py-20 bg-white" id="bookmarksSection">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl font-bold text-navy mb-6" id="bookmarksTitle">
+                    Your Bookmarked Articles
+                </h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto leading-relaxed" id="bookmarksText">
+                    Saved articles for quick reference and continued reading
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="bookmarkedArticles">
+                <div class="text-center py-12 text-gray-500" id="noBookmarks">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                    </svg>
+                    <p>No bookmarked articles yet. Click the bookmark icon on any article to save it here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex items-center justify-center space-x-4 mb-6">
+                <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-navy" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10 9 11 1.09-.21 2.11-.71 3-1.36V21h2v-4.36c.89.65 1.91 1.15 3 1.36 5.16-1 9-5.45 9-11V7l-10-5z"/>
+                    </svg>
+                </div>
+                <h3 class="font-display text-xl font-semibold">Lebanese Forces Educational Resource</h3>
+            </div>
+            <p class="text-gray-300 mb-4" id="footerText">
+                A comprehensive educational platform for understanding Lebanese politics and the role of the Lebanese Forces
+            </p>
+            
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.647.001 12.017.001zm5.568 16.471c-1.193 1.193-2.777 1.85-4.46 1.85s-3.267-.657-4.46-1.85c-1.193-1.193-1.85-2.777-1.85-4.46s.657-3.267 1.85-4.46c1.193-1.193 2.777-1.85 4.46-1.85s3.267.657 4.46 1.85c1.193 1.193 1.85 2.777 1.85 4.46s-.657 3.267-1.85 4.46z"/>
+                    </svg>
+                    <span class="text-sm font-medium">Follow on Instagram</span>
+                </a>
+            </div>
+            
+            <p class="text-sm text-gray-400" id="footerCopyright">
+                © 2025 Educational Resource Platform. Created for educational and research purposes.
+            </p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // News page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dropdown navigation functionality
+            const navDropdown = document.getElementById('navDropdown');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const dropdownIcon = document.getElementById('dropdownIcon');
+            
+            if (navDropdown && dropdownMenu) {
+                navDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('hidden');
+                    dropdownIcon.style.transform = dropdownMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                });
+                
+                document.addEventListener('click', function() {
+                    dropdownMenu.classList.add('hidden');
+                    dropdownIcon.style.transform = 'rotate(0deg)';
+                });
+                
+                dropdownMenu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+            
+            // News filtering
+            const newsFilterButtons = document.querySelectorAll('.filter-btn');
+            const newsCards = document.querySelectorAll('.news-card');
+            
+            newsFilterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Update active button
+                    newsFilterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter news cards
+                    newsCards.forEach(card => {
+                        if (category === 'all' || card.dataset.category === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // News search
+            const newsSearch = document.getElementById('newsSearch');
+            newsSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                newsCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const content = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Bookmark functionality
+            const bookmarkButtons = document.querySelectorAll('.bookmark-btn');
+            bookmarkButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = this.dataset.article;
+                    toggleBookmark(articleId, this);
+                });
+            });
+            
+            // Load bookmarked articles
+            loadBookmarkedArticles();
+            
+            // Quiz functionality
+            setupQuiz();
+        });
+        
+        function toggleBookmark(articleId, button) {
+            let bookmarks = JSON.parse(localStorage.getItem('lf-bookmarks') || '[]');
+            
+            if (bookmarks.includes(articleId)) {
+                bookmarks = bookmarks.filter(id => id !== articleId);
+                button.classList.remove('bookmarked');
+            } else {
+                bookmarks.push(articleId);
+                button.classList.add('bookmarked');
+            }
+            
+            localStorage.setItem('lf-bookmarks', JSON.stringify(bookmarks));
+            loadBookmarkedArticles();
+        }
+        
+        function loadBookmarkedArticles() {
+            const bookmarks = JSON.parse(localStorage.getItem('lf-bookmarks') || '[]');
+            const bookmarkedContainer = document.getElementById('bookmarkedArticles');
+            const noBookmarks = document.getElementById('noBookmarks');
+            
+            if (bookmarks.length === 0) {
+                noBookmarks.style.display = 'block';
+                bookmarkedContainer.innerHTML = '';
+                bookmarkedContainer.appendChild(noBookmarks);
+                return;
+            }
+            
+            noBookmarks.style.display = 'none';
+            bookmarkedContainer.innerHTML = '';
+            
+            // Create bookmarked articles (simplified for demo)
+            bookmarks.forEach(articleId => {
+                const articleCard = createBookmarkedArticleCard(articleId);
+                bookmarkedContainer.appendChild(articleCard);
+            });
+        }
+        
+        function createBookmarkedArticleCard(articleId) {
+            const card = document.createElement('div');
+            card.className = 'news-card bg-white rounded-xl shadow-lg overflow-hidden';
+            card.innerHTML = `
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">Bookmarked</span>
+                        <button class="bookmark-btn bookmarked text-gold" onclick="toggleBookmark('${articleId}', this)">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                        Bookmarked Article: ${articleId}
+                    </h3>
+                    <p class="text-charcoal leading-relaxed mb-4">
+                        This article has been saved to your bookmarks for easy reference.
+                    </p>
+                    <div class="flex items-center justify-between text-sm text-gray-600">
+                        <span>Saved for later reading</span>
+                        <button class="text-gold hover:underline">Read More</button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+        
+        function setupQuiz() {
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            const submitButton = document.getElementById('submitQuiz');
+            const quizResult = document.getElementById('quizResult');
+            const quizQuestion = document.getElementById('quizQuestion');
+            
+            let selectedAnswer = null;
+            
+            quizOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    quizOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedAnswer = this.dataset.answer;
+                });
+            });
+            
+            submitButton.addEventListener('click', function() {
+                if (!selectedAnswer) {
+                    alert('Please select an answer first.');
+                    return;
+                }
+                
+                // Check answer (correct answer is B)
+                if (selectedAnswer === 'b') {
+                    quizOptions.forEach(opt => {
+                        if (opt.dataset.answer === 'b') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    
+                    setTimeout(() => {
+                        quizQuestion.classList.add('hidden');
+                        quizResult.classList.remove('hidden');
+                    }, 1000);
+                } else {
+                    quizOptions.forEach(opt => {
+                        if (opt.dataset.answer === selectedAnswer) {
+                            opt.classList.add('incorrect');
+                        }
+                        if (opt.dataset.answer === 'b') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                    
+                    setTimeout(() => {
+                        alert('Incorrect. The correct answer is B) 1976 - Through the unification of Christian militias. Try again!');
+                        // Reset quiz
+                        quizOptions.forEach(opt => {
+                            opt.classList.remove('selected', 'correct', 'incorrect');
+                        });
+                        selectedAnswer = null;
+                    }, 1500);
+                }
+            });
+            
+            // Next question button
+            document.getElementById('nextQuestion').addEventListener('click', function() {
+                // Reset quiz for next question
+                quizOptions.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+                selectedAnswer = null;
+                
+                // Show next question (simplified for demo)
+                quizResult.classList.add('hidden');
+                quizQuestion.classList.remove('hidden');
+                
+                // Update question content
+                document.querySelector('#quizQuestion h3').textContent = 'Question 2: Who is the current leader of the Lebanese Forces?';
+                document.querySelectorAll('.quiz-option')[0].textContent = 'A) Michel Aoun';
+                document.querySelectorAll('.quiz-option')[1].textContent = 'B) Samir Geagea';
+                document.querySelectorAll('.quiz-option')[2].textContent = 'C) Gebran Bassil';
+                document.querySelectorAll('.quiz-option')[3].textContent = 'D) Saad Hariri';
+                
+                // Update correct answer
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    if (opt.textContent.includes('Samir Geagea')) {
+                        opt.dataset.answer = 'correct';
+                    } else {
+                        opt.dataset.answer = 'wrong';
+                    }
+                });
+            });
+        }
+        
+        function showComingSoon() {
+            alert('This feature is coming soon! Thank you for your interest.');
+        }
+        
+        // Daily news update system
+        function updateDailyNews() {
+            const newsGrid = document.getElementById('newsGrid');
+            const lastUpdate = localStorage.getItem('lf-news-last-update');
+            const today = new Date().toDateString();
+            
+            // Check if news was already updated today
+            if (lastUpdate !== today) {
+                // Add new daily news item (simulated for demo)
+                const dailyNewsItem = document.createElement('article');
+                dailyNewsItem.className = 'news-card bg-white rounded-xl shadow-lg overflow-hidden reveal';
+                dailyNewsItem.setAttribute('data-category', 'political');
+                dailyNewsItem.setAttribute('data-date', new Date().toISOString().split('T')[0]);
+                
+                dailyNewsItem.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">Daily Update</span>
+                            <button class="bookmark-btn text-gray-400 hover:text-gold" data-article="daily-${Date.now()}">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold text-navy mb-3">
+                            Lebanese Forces Youth Daily Briefing
+                        </h3>
+                        <p class="text-charcoal leading-relaxed mb-4">
+                            Stay updated with the latest developments in Lebanese politics and Lebanese Forces activities. Check back daily for new educational content and political analysis.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-600">
+                            <span>${new Date().toLocaleDateString()}</span>
+                            <span>2 min read</span>
+                        </div>
+                    </div>
+                `;
+                
+                // Insert at the beginning of the news grid
+                newsGrid.insertBefore(dailyNewsItem, newsGrid.firstChild);
+                
+                // Update last update date
+                localStorage.setItem('lf-news-last-update', today);
+                
+                // Add bookmark functionality to new item
+                const bookmarkBtn = dailyNewsItem.querySelector('.bookmark-btn');
+                bookmarkBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = this.dataset.article;
+                    toggleBookmark(articleId, this);
+                });
+            }
+        }
+        
+        // Initialize daily news updates
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDailyNews();
+            
+            // Set up automatic daily updates (check every hour)
+            setInterval(updateDailyNews, 3600000); // 1 hour in milliseconds
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Language toggle
+        const langToggle = document.getElementById('langToggle');
+        const currentLang = document.getElementById('currentLang');
+        
+        langToggle.addEventListener('click', function() {
+            const isEnglish = currentLang.textContent === 'English';
+            currentLang.textContent = isEnglish ? 'العربية' : 'English';
+            
+            // Toggle text direction
+            document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
+            document.documentElement.lang = isEnglish ? 'ar' : 'en';
+            
+            // Show coming soon message for Arabic
+            if (isEnglish) {
+                alert('Arabic version coming soon! / النسخة العربية قريباً!');
+            }
+        });
+    </script>
+    
+    <!-- Config Loader Script -->
+    <script src="config-loader.js"></script>
+</body>
+</html>

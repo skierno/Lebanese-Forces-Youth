@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Party Comparison - Lebanese Forces Youth</title>
+    <meta name="description" content="Compare Lebanese Forces with other major Lebanese political parties across ideology, policies, and electoral performance.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cedar-red': '#DC143C',
+                        'cedar-green': '#228B22',
+                        'phoenix-gold': '#FFD700',
+                        'mediterranean-blue': '#1a2332'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #DC143C, #228B22);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Desktop Navigation must override hidden class at md breakpoint */
+        @media (min-width: 768px) {
+            .hidden.md\:flex {
+                display: flex !important;
+            }
+        }
+        
+        /* Ensure navigation is always visible */
+        nav {
+            position: fixed !important;
+            top: 0 !important;
+            width: 100% !important;
+            z-index: 1000 !important;
+        }
+        
+        /* Ensure content doesn't hide behind nav */
+        body {
+            padding-top: 70px;
+        }
+        
+        .lf-positive {
+            background: linear-gradient(135deg, #dcfce7, #ecfdf5);
+            border-left: 4px solid #22c55e;
+        }
+        
+        .lf-negative {
+            background: linear-gradient(135deg, #fee2e2, #fef3c7);
+            border-left: 4px solid #ef4444;
+        }
+        
+        .party-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">LF</span>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-red-600">Lebanese Forces Youth</h1>
+                        <p class="text-xs text-gray-500">Educational Platform</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-red-600">Home</a>
+                    <a href="timeline.html" class="text-gray-600 hover:text-red-600">Timeline</a>
+                    <a href="comparison.html" class="text-red-600 font-medium">Comparison</a>
+                    <a href="news.html" class="text-gray-600 hover:text-red-600">News</a>
+                    <a href="join.html" class="text-gray-600 hover:text-red-600">Join</a>
+                    <a href="/admin" class="text-gray-600 hover:text-red-600 flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>Admin</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Language Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
+                        <span id="currentLang">English</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40 transform translate-x-full transition-transform duration-300 md:hidden">
+            <div class="p-4">
+                <a href="index.html" class="block py-2 text-gray-600 hover:text-red-600">Home</a>
+                <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600">Timeline</a>
+                <a href="comparison.html" class="block py-2 text-red-600 font-medium">Comparison</a>
+                <a href="news.html" class="block py-2 text-gray-600 hover:text-red-600">News</a>
+                <a href="join.html" class="block py-2 text-gray-600 hover:text-red-600">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white pt-16">
+        <div class="max-w-7xl mx-auto px-4 py-20 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+                    <span class="text-4xl text-red-600 font-bold">LF</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Political Party Comparison
+                </h1>
+                
+                <p class="text-xl md:text-2xl mb-8 leading-relaxed">
+                    Comprehensive analysis of Lebanese political parties - ideology, policies, and performance compared to Lebanese Forces
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-red-600 transition-colors">
+                        Back to Home
+                    </a>
+                    <a href="timeline.html" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
+                        View Timeline
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lebanese Forces Achievements Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Lebanese Forces Achievements</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Record of accomplishments and contributions to Lebanon's sovereignty and Christian rights
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Achievement 1 -->
+                <div class="lf-positive p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Christian Rights Protection</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Successfully defended Christian communities during the civil war and continues to advocate for Christian political rights and representation in Lebanon's political system.
+                    </p>
+                </div>
+                
+                <!-- Achievement 2 -->
+                <div class="lf-positive p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Sovereignty Advocacy</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Consistently advocated for Lebanese sovereignty and independence, opposing foreign interference and occupation forces throughout Lebanon's modern history.
+                    </p>
+                </div>
+                
+                <!-- Achievement 3 -->
+                <div class="lf-positive p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Democratic Principles</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Promoted democratic governance, rule of law, and institutional reform, maintaining commitment to democratic processes even during challenging periods.
+                    </p>
+                </div>
+                
+                <!-- Achievement 4 -->
+                <div class="lf-positive p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Economic Reform</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Advocated for economic reforms, anti-corruption measures, and transparent governance to address Lebanon's economic challenges and promote development.
+                    </p>
+                </div>
+                
+                <!-- Achievement 5 -->
+                <div class="lf-positive p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Parliamentary Growth</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        From no parliamentary representation to becoming a major parliamentary bloc, demonstrating significant growth in democratic participation and political influence.
+                    </p>
+                </div>
+                
+                <!-- Achievement 6 -->
+                <div class="lf-positive p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-green-600 mb-3">Youth Movement</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Established strong youth organizations that continue the party's legacy and engage young Lebanese in political participation and civic education.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Party Comparison Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Major Lebanese Political Parties</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Comprehensive comparison of ideology, policies, and political alignment
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Lebanese Forces -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-red-600 mr-4">LF</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-red-600">Lebanese Forces</h3>
+                            <p class="text-gray-600 text-sm">Christian Democratic Party</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">15 (2022)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Christian Democracy</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Leader:</span>
+                            <span class="font-semibold">Samir Geagea</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-green-600">Pro-Sovereignty</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Largest Christian political party advocating for Lebanese sovereignty, democracy, and Christian rights. Strong opposition to Hezbollah influence and Syrian interference.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Hezbollah -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-yellow-600 mr-4">H</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-yellow-600">Hezbollah</h3>
+                            <p class="text-gray-600 text-sm">Shia Islamist Party</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">13 (2022)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Shia Islamism</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Leader:</span>
+                            <span class="font-semibold">Hassan Nasrallah</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-red-600">Pro-Iran/Syria</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Armed Shia political party and militia with significant influence in Lebanese politics. Maintains close ties to Iran and has been designated as a terrorist organization by multiple countries.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Amal Movement -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-green-600 mr-4">A</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-green-600">Amal Movement</h3>
+                            <p class="text-gray-600 text-sm">Shia Political Party</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">14 (2022)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Shia Politics</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Leader:</span>
+                            <span class="font-semibold">Nabih Berri</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-yellow-600">Parliament Speaker</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Shia political party led by Parliament Speaker Nabih Berri. Generally aligned with Hezbollah but maintains some independence. Controls significant government positions and resources.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Kataeb Party -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-blue-600 mr-4">K</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600">Kataeb Party</h3>
+                            <p class="text-gray-600 text-sm">Traditional Christian Party</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">4 (2022)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Phoenicianism</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Leader:</span>
+                            <span class="font-semibold">Sami Gemayel</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-blue-600">Independent</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Historic Christian party founded by the Gemayel family. Traditionally represented elite Christian interests but has lost significant influence to Lebanese Forces in recent decades.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Progressive Socialist Party -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-purple-600 mr-4">PSP</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-purple-600">Progressive Socialist Party</h3>
+                            <p class="text-gray-600 text-sm">Druze Political Party</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">9 (2022)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Progressive</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Leader:</span>
+                            <span class="font-semibold">Walid Jumblatt</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-purple-600">Druze Leader</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Druze political party led by Walid Jumblatt. Represents Druze interests and maintains a complex relationship with both March 8 and March 14 alliances, often shifting positions based on political circumstances.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FPM -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-orange-600 mr-4">FPM</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-orange-600">Free Patriotic Movement</h3>
+                            <p class="text-gray-600 text-sm">Christian Political Party</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">18 (2022)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Reformism</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Leader:</span>
+                            <span class="font-semibold">Gebran Bassil</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-red-600">Pro-Hezbollah</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Founded by Michel Aoun, now led by Gebran Bassil. Initially opposed to Syrian influence but later allied with Hezbollah. Accused of corruption and contributing to Lebanon's economic crisis.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Sunni Alignment (not Future Movement) -->
+                <div class="card-hover bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="party-logo bg-indigo-600 mr-4">S</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-indigo-600">Independent Sunni Figures</h3>
+                            <p class="text-gray-600 text-sm">Sunni Political Figures</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Parliamentary Seats:</span>
+                            <span class="font-semibold">Various</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Ideology:</span>
+                            <span class="font-semibold">Moderate Islam</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Position:</span>
+                            <span class="font-semibold text-indigo-600">Pro-Sovereignty</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-600 text-xs leading-relaxed">
+                            Various Sunni political figures and movements that align with Lebanese Forces on sovereignty issues, including former Prime Ministers and independent MPs who support Lebanese independence from foreign influence.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Comparison Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Detailed Policy Comparison</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Key policy positions and political alignments
+                </p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white rounded-lg shadow-sm border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="px-6 py-4 text-left font-semibold text-gray-900">Party</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-900">Hezbollah</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-900">Syria</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-900">Iran</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-900">Reform</th>
+                            <th class="px-6 py-4 text-left font-semibold text-gray-900">Sovereignty</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-red-600">Lebanese Forces</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-green-600">Supports</td>
+                            <td class="px-6 py-4 text-green-600">Strong Support</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-yellow-600">Hezbollah</td>
+                            <td class="px-6 py-4 text-green-600">Leads</td>
+                            <td class="px-6 py-4 text-green-600">Supports</td>
+                            <td class="px-6 py-4 text-green-600">Aligned</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-green-600">Amal</td>
+                            <td class="px-6 py-4 text-green-600">Allied</td>
+                            <td class="px-6 py-4 text-yellow-600">Neutral</td>
+                            <td class="px-6 py-4 text-green-600">Supported</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-red-600">Weak</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-blue-600">Kataeb</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-yellow-600">Mixed</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-green-600">Supports</td>
+                            <td class="px-6 py-4 text-green-600">Supports</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-purple-600">PSP</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-yellow-600">Mixed</td>
+                            <td class="px-6 py-4 text-yellow-600">Mixed</td>
+                            <td class="px-6 py-4 text-green-600">Supports</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-orange-600">FPM</td>
+                            <td class="px-6 py-4 text-green-600">Allied</td>
+                            <td class="px-6 py-4 text-green-600">Supports</td>
+                            <td class="px-6 py-4 text-green-600">Aligned</td>
+                            <td class="px-6 py-4 text-red-600">Opposes</td>
+                            <td class="px-6 py-4 text-red-600">Weak</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Differences Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Why Choose Lebanese Forces?</h2>
+                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                    Key differences that set Lebanese Forces apart from other political parties
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Commitment to Sovereignty</h3>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Consistent opposition to foreign interference</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Support for Lebanese independence</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Advocacy for state institutions</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-red-600 mb-4">Democratic Values</h3>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Commitment to democratic processes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Rule of law advocacy</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-4 h-4 text-green-500 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Anti-corruption stance</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-red-600 mb-6">
+                Learn More About Lebanese Forces
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Explore our comprehensive resources and understand why Lebanese Forces represents the best choice for Lebanon's future
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="timeline.html" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors">
+                    View Complete Timeline
+                </a>
+                <a href="join.html" class="border-2 border-red-600 text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-600 hover:text-white transition-colors">
+                    Join the Movement
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">LF</span>
+                </div>
+                <h3 class="text-lg font-semibold">Lebanese Forces Youth - Educational Platform</h3>
+            </div>
+            <p class="text-gray-300 mb-4 text-sm">
+                Educational platform for understanding Lebanese politics and the role of the Lebanese Forces Youth movement
+            </p>
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
+                    Follow on Instagram
+                </a>
+            </div>
+            <p class="text-xs text-gray-400">
+                © 2025 Lebanese Forces Youth Educational Platform. Created for educational purposes.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Config Loader Script -->
+    <script src="config-loader.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('translate-x-full');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.add('translate-x-full');
+            }
+        });
+        
+        // Language toggle
+        const langToggle = document.getElementById('langToggle');
+        const currentLang = document.getElementById('currentLang');
+        
+        langToggle.addEventListener('click', function() {
+            const isEnglish = currentLang.textContent === 'English';
+            currentLang.textContent = isEnglish ? 'العربية' : 'English';
+            
+            // Toggle text direction
+            document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
+            document.documentElement.lang = isEnglish ? 'ar' : 'en';
+            
+            // Show coming soon message for Arabic
+            if (isEnglish) {
+                alert('Arabic version coming soon! / النسخة العربية قريباً!');
+            }
+        });
+    </script>
+</body>
+</html>
