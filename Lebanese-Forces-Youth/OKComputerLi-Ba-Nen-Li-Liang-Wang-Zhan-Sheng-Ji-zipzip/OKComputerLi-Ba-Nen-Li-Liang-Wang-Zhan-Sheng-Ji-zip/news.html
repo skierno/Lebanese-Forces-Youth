@@ -944,5 +944,41 @@
     
     <!-- Config Loader Script -->
     <script src="config-loader.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Language toggle
+        const langToggle = document.getElementById('langToggle');
+        const currentLang = document.getElementById('currentLang');
+        
+        langToggle.addEventListener('click', function() {
+            const isEnglish = currentLang.textContent === 'English';
+            currentLang.textContent = isEnglish ? 'العربية' : 'English';
+            
+            // Toggle text direction
+            document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
+            document.documentElement.lang = isEnglish ? 'ar' : 'en';
+            
+            // Show coming soon message for Arabic
+            if (isEnglish) {
+                alert('Arabic version coming soon! / النسخة العربية قريباً!');
+            }
+        });
+    </script>
 </body>
 </html>
