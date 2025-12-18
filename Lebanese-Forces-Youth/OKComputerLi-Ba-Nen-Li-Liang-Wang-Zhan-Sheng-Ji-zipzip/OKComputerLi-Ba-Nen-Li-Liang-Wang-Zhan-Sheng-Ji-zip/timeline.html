@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<body>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historical Timeline - Lebanese Forces Youth</title>
@@ -169,7 +171,7 @@
                         </svg>
                     </button>
                 </div>
-                
+
                 <!-- Language Toggle -->
                 <div class="flex items-center space-x-4">
                     <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
@@ -183,7 +185,7 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
             <div class="p-4">
                 <a href="index.html" class="block py-2 text-gray-600 hover:text-red-600">Home</a>
                 <a href="timeline.html" class="block py-2 text-red-600 font-medium">Timeline</a>
@@ -655,4 +657,22 @@
             
             // Show coming soon message for Arabic
             if (isEnglish) {
-                alert('Arabic version coming soon! / النسخة العربية قريبا
+            alert('Arabic version coming soon!/النسخة العربية قريبا
+            
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menu = document.getElementById("mobile-menu");
+        const button = document.getElementById("mobileMenuBtn");
+
+        if (!menu || !button) return;
+
+        menu.classList.add("hidden");
+
+        button.addEventListener("click", function () {
+            menu.classList.toggle("hidden");
+        });
+    });
+    </script>
+
+    </body>
+    </html>

@@ -87,6 +87,16 @@
             background: #22c55e;
             color: white;
         }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -136,7 +146,7 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40 active transition-transform duration-300 md:hidden">
+        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
             <div class="p-4">
                 <a href="index.html" class="block py-2 text-gray-600 hover:text-red-600">Home</a>
                 <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600">Timeline</a>
@@ -481,6 +491,21 @@
                 alert('Arabic version coming soon! / النسخة العربية قريباً!');
             }
         });
+    </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menu = document.getElementById("mobile-menu");
+        const button = document.getElementById("menu-button");
+
+        if (!menu || !button) return;
+
+        // Make sure menu is closed on load
+        menu.classList.add("hidden");
+
+        button.addEventListener("click", function () {
+            menu.classList.toggle("hidden");
+        });
+    });
     </script>
 </body>
 </html>
