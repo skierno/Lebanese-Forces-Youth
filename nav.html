@@ -1,53 +1,73 @@
-<!-- Shared Navigation -->
-<nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+      <!-- NAVIGATION -->
+<nav class="bg-white shadow-sm fixed top-0 w-full z-[10000]">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="flex justify-between items-center py-3">
+    <div class="flex justify-between items-center h-16">
 
       <!-- Logo -->
-      <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-        <img src="resources/logo.png" alt="Lebanese Forces Youth Logo" class="w-10 h-10 object-contain">
-        <div>
-        <h1 class="text-lg font-bold text-red-600" id="siteTitle" data-edit-id="siteTitle">Lebanese Forces Youth USA</h1>
-        <p class="text-xs text-gray-500" id="siteSubtitle" data-edit-id="siteSubtitle">Educational Platform</p>
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-3 z-[10001]">
+        <img
+          src="resources/logo.png"
+          alt="Lebanese Forces Youth"
+          class="h-10 w-10 object-contain"
+        />
+        <div class="leading-tight block">
+          <div class="text-red-600 font-bold">
+            Lebanese Forces Youth
+          </div>
+          <div class="text-xs text-gray-500">
+            Educational Platform
+          </div>
         </div>
       </a>
 
-      <!-- Desktop Links -->
-      <div class="hidden md:flex items-center space-x-6">
-        <a href="index.html" class="nav-link" data-nav="home">Home</a>
-        <a href="youth.html" class="nav-link" data-nav="who">Who We Are</a>
-        <a href="timeline.html" class="nav-link" data-nav="timeline">Timeline</a>
-        <a href="comparison.html" class="nav-link" data-nav="comparison">Comparison</a>
-        <a href="news.html" class="nav-link" data-nav="news">News</a>
-        <a href="join.html" class="nav-link" data-nav="join">Join</a>
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="youth.html" class="nav-link">Who We Are</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="comparison.html" class="nav-link">Comparison</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="join.html" class="nav-link">Join</a>
       </div>
 
-      <!-- Right Side -->
-      <div class="flex items-center gap-3">
-        <!-- Language Toggle -->
-        <button id="langToggle" class="px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 transition">
+      <!-- Right Controls (ONE language button + hamburger) -->
+      <div class="flex items-center gap-3 z-[10001]">
+        <button
+          id="langToggle"
+          class="border border-gray-300 px-3 py-1.5 rounded-lg text-sm"
+          style="pointer-events:auto"
+        >
           <span id="currentLang">English</span>
         </button>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobileMenuBtn" class="md:hidden text-gray-700 text-2xl focus:outline-none" aria-label="Open menu">
+        <button
+          id="mobileMenuBtn"
+          class="md:hidden text-2xl"
+          style="pointer-events:auto"
+          aria-label="Open menu"
+        >
           ☰
         </button>
       </div>
-
     </div>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
-    <div class="p-4 space-y-2">
-      <a href="index.html" class="nav-link" data-nav="home">Home</a>
-      <a href="youth.html" class="nav-link" data-nav="who">Who We Are</a>
-      <a href="timeline.html" class="nav-link" data-nav="timeline">Timeline</a>
-      <a href="comparison.html" class="nav-link" data-nav="comparison">Comparison</a>
-      <a href="news.html" class="nav-link" data-nav="news">News</a>
-      <a href="join.html" class="nav-link" data-nav="join">Join</a>
+  <!-- MOBILE MENU -->
+  <div
+    id="mobileMenu"
+    class="mobile-menu fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-[10001] md:hidden"
+  >
+    <div class="p-6 space-y-4">
+      <a href="index.html" class="block nav-link">Home</a>
+      <a href="youth.html" class="block nav-link">Who We Are</a>
+      <a href="timeline.html" class="block nav-link">Timeline</a>
+      <a href="comparison.html" class="block nav-link">Comparison</a>
+      <a href="news.html" class="block nav-link">News</a>
+      <a href="join.html" class="block nav-link">Join</a>
     </div>
   </div>
-  <div id="google_translate_element"></div>
+
+  <!-- Hidden Google Translate Mount -->
+  <div id="google_translate_element" style="display:none"></div>
 </nav>

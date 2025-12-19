@@ -592,24 +592,19 @@
     <!-- JavaScript -->
     <script>
     fetch("nav.html")
-      .then(res => res.text())
+      .then(r => r.text())
       .then(html => {
-        // Inject shared nav
         document.getElementById("nav-placeholder").innerHTML = html;
 
-        /* ---------- NAV BEHAVIOR ---------- */
+        // Load mobile menu behavior (your nav.js)
         const navScript = document.createElement("script");
         navScript.src = "nav.js";
         document.body.appendChild(navScript);
 
-        /* ---------- GOOGLE TRANSLATE ---------- */
+        // Google Translate init
         window.googleTranslateElementInit = function () {
           new google.translate.TranslateElement(
-            {
-              pageLanguage: "en",
-              includedLanguages: "en,ar",
-              autoDisplay: false
-            },
+            { pageLanguage: "en", includedLanguages: "en,ar", autoDisplay: false },
             "google_translate_element"
           );
         };
@@ -618,48 +613,49 @@
         gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
         document.body.appendChild(gt);
 
-        /* ---------- WIRE TO YOUR BUTTON ---------- */
+        // Wire YOUR button after Google creates the select
         const langToggle = document.getElementById("langToggle");
         const currentLang = document.getElementById("currentLang");
 
         function setLanguage(lang) {
           const select = document.querySelector("select.goog-te-combo");
-          if (!select) return;
+          if (!select) return false;
 
           select.value = lang;
           select.dispatchEvent(new Event("change"));
 
           localStorage.setItem("siteLang", lang);
-          if (currentLang) {
-            currentLang.textContent = lang === "ar" ? "العربية" : "English";
-          }
+          if (currentLang) currentLang.textContent = (lang === "ar") ? "العربية" : "English";
+          return true;
         }
 
-        // Restore saved language
-        const savedLang = localStorage.getItem("siteLang");
-        if (savedLang) {
-          setTimeout(() => setLanguage(savedLang), 500);
-        }
+        function waitForGoogleSelectAndBind() {
+          let tries = 0;
+          const timer = setInterval(() => {
+            tries++;
+            const select = document.querySelector("select.goog-te-combo");
 
-        if (langToggle) {
-          langToggle.addEventListener("click", () => {
-            const next =
-              localStorage.getItem("siteLang") === "ar" ? "en" : "ar";
-            setLanguage(next);
-          });
-        }
+            if (select) {
+              clearInterval(timer);
 
-        /* ---------- KILL GOOGLE TOP BAR (PERMANENT) ---------- */
-        (function removeGoogleBar() {
-          const interval = setInterval(() => {
-            const iframe = document.querySelector(".goog-te-banner-frame");
-            if (iframe) {
-              iframe.remove();
-              document.body.style.top = "0px";
-              clearInterval(interval);
+              // Restore saved language
+              const saved = localStorage.getItem("siteLang");
+              if (saved) setLanguage(saved);
+
+              // Click handler
+              if (langToggle) {
+                langToggle.addEventListener("click", () => {
+                  const next = (localStorage.getItem("siteLang") === "ar") ? "en" : "ar";
+                  setLanguage(next);
+                });
+              }
             }
+
+            if (tries > 60) clearInterval(timer); // ~6 seconds max
           }, 100);
-        })();
+        }
+
+        waitForGoogleSelectAndBind();
       });
     </script>
 

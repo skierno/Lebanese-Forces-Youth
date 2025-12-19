@@ -1,31 +1,45 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // Mobile menu
-  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
+(function () {
+  function initNav() {
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-  if (mobileMenuBtn && mobileMenu) {
+    if (!mobileMenuBtn || !mobileMenu) {
+      console.warn("[nav.js] Missing #mobileMenuBtn or #mobileMenu");
+      return;
+    }
+
+    // Prevent double-binding if nav is injected more than once
+    if (mobileMenuBtn.dataset.bound === "1") return;
+    mobileMenuBtn.dataset.bound = "1";
+
+    // Toggle menu
     mobileMenuBtn.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
       mobileMenu.classList.toggle("active");
     });
 
+    // Close on outside click
     document.addEventListener("click", (e) => {
-      if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+      if (
+        mobileMenu.classList.contains("active") &&
+        !mobileMenu.contains(e.target) &&
+        !mobileMenuBtn.contains(e.target)
+      ) {
         mobileMenu.classList.remove("active");
       }
     });
+
+    // Keep clicks inside menu from closing it
+    mobileMenu.addEventListener("click", (e) => e.stopPropagation());
+
+    console.log("[nav.js] Mobile menu bound ✅");
   }
 
-  // ===== ACTIVE PAGE HIGHLIGHT (100% RELIABLE) =====
-  const page = document.body?.dataset?.page;
-
-  if (page) {
-    document.querySelectorAll(".nav-link").forEach(link => {
-      if (link.dataset.nav === page) {
-        link.classList.add("active");
-      }
-    });
+  // Run immediately if DOM is already ready (common with injected nav)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNav);
+  } else {
+    initNav();
   }
-
-// ===== LANGUAGE TOGGLE (WORKS ON EVERY PAGE) =====
-  
+})();
