@@ -235,7 +235,8 @@
       <!-- Close Button -->
       <button
         onclick="closeGallery()"
-        class="fixed top-5 right-5 text-white text-4xl z-50 hover:opacity-80"
+        class="fixed top-4 right-4 text-white text-4xl
+               z-[100000] pointer-events-auto"
         aria-label="Close gallery"
       >
         &times;
@@ -525,6 +526,53 @@
     const zoomed = img.classList.toggle("scale-150");
     img.style.cursor = zoomed ? "zoom-out" : "zoom-in";
   }
+  </script>
+  <script>
+  <script>
+  /* ================= GALLERY EXIT CONTROLS (FIXED) ================= */
+
+  const galleryModal = document.getElementById("galleryModal");
+
+  let touchStartY = null;
+  let touchStartScroll = null;
+
+  galleryModal?.addEventListener("touchstart", (e) => {
+    // Only allow swipe-close if user is at the top
+    touchStartScroll = galleryModal.scrollTop;
+
+    if (touchStartScroll === 0) {
+      touchStartY = e.touches[0].clientY;
+    } else {
+      touchStartY = null;
+    }
+  });
+
+  galleryModal?.addEventListener("touchmove", (e) => {
+    if (touchStartY === null) return;
+
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - touchStartY;
+
+    // Must be a deliberate swipe DOWN from the top
+    if (diff > 120) {
+      closeGallery();
+      touchStartY = null;
+    }
+  });
+
+  /* Tap outside image closes gallery */
+  galleryModal?.addEventListener("click", (e) => {
+    if (e.target === galleryModal) {
+      closeGallery();
+    }
+  });
+
+  /* ESC closes gallery */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !galleryModal.classList.contains("hidden")) {
+      closeGallery();
+    }
+  });
   </script>
 </body>
 </html>
