@@ -9,8 +9,48 @@ body { padding-top: 70px; }
 }
 
 .nav-link {
-  color: #4b5563; /* gray-600 */
-  transition: color 0.2s ease;
+  color: #4b5563 !important;
 }
-.nav-link:hover { color: #DC143C; }
-.nav-link.active { color: #DC143C; font-weight: 600; }
+
+.nav-link:hover {
+  color: #DC143C !important;
+}
+
+.nav-link.active {
+  color: #DC143C !important;
+  font-weight: 600;
+}
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
+}
+/* Completely hide Google Translate UI */
+.goog-te-banner-frame,
+.goog-logo-link,
+.goog-te-gadget,
+.goog-te-combo {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+/* ---- FORCE HIDE GOOGLE TRANSLATE BANNER ---- */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Hide any leftover translate UI */
+.goog-logo-link,
+.goog-te-gadget,
+.goog-te-combo {
+  display: none !important;
+}

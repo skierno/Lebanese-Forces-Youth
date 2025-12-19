@@ -16,35 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== ACTIVE PAGE HIGHLIGHT (BULLETPROOF) =====
-  const currentURL = window.location.href;
+  // ===== ACTIVE PAGE HIGHLIGHT (100% RELIABLE) =====
+  const page = document.body?.dataset?.page;
 
-  document.querySelectorAll(".nav-link").forEach(link => {
-    const href = link.getAttribute("href");
-
-    if (
-      (href === "index.html" && (currentURL.endsWith("/") || currentURL.includes("index"))) ||
-      currentURL.includes(href.replace(".html", ""))
-    ) {
-      link.classList.add("active");
-    }
-  });
-
-  // Language toggle (safe)
-  const langToggle = document.getElementById("langToggle");
-  const currentLang = document.getElementById("currentLang");
-
-  if (langToggle && currentLang) {
-    langToggle.addEventListener("click", () => {
-      const isEnglish = currentLang.textContent.trim() === "English";
-
-      currentLang.textContent = isEnglish ? "العربية" : "English";
-      document.documentElement.dir = isEnglish ? "rtl" : "ltr";
-      document.documentElement.lang = isEnglish ? "ar" : "en";
-
-      if (typeof applyTranslations === "function") {
-        applyTranslations(isEnglish ? "ar" : "en");
+  if (page) {
+    document.querySelectorAll(".nav-link").forEach(link => {
+      if (link.dataset.nav === page) {
+        link.classList.add("active");
       }
     });
   }
-});
+
+// ===== LANGUAGE TOGGLE (WORKS ON EVERY PAGE) =====
+  

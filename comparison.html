@@ -681,50 +681,77 @@
 
     <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-            }
-        });
-        
-        // Language toggle
-        const langToggle = document.getElementById('langToggle');
-        const currentLang = document.getElementById('currentLang');
-        
-        langToggle.addEventListener('click', function() {
-            const isEnglish = currentLang.textContent === 'English';
-            currentLang.textContent = isEnglish ? 'العربية' : 'English';
-            
-            // Toggle text direction
-            document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
-            document.documentElement.lang = isEnglish ? 'ar' : 'en';
-            
-            // Show coming soon message for Arabic
-            if (isEnglish) {
-                alert('Arabic version coming soon! / النسخة العربية قريباً!');
-            }
-        });
-    </script>
-    <script>
-      fetch("nav.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("nav-placeholder").innerHTML = html;
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => {
+        // Inject shared nav
+        document.getElementById("nav-placeholder").innerHTML = html;
 
-          // After nav loads, load nav.js so it can find the elements
-          const s = document.createElement("script");
-          s.src = "nav.js";
-          document.body.appendChild(s);
-        });
+        /* ---------- NAV BEHAVIOR ---------- */
+        const navScript = document.createElement("script");
+        navScript.src = "nav.js";
+        document.body.appendChild(navScript);
+
+        /* ---------- GOOGLE TRANSLATE ---------- */
+        window.googleTranslateElementInit = function () {
+          new google.translate.TranslateElement(
+            {
+              pageLanguage: "en",
+              includedLanguages: "en,ar",
+              autoDisplay: false
+            },
+            "google_translate_element"
+          );
+        };
+
+        const gt = document.createElement("script");
+        gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(gt);
+
+        /* ---------- WIRE TO YOUR BUTTON ---------- */
+        const langToggle = document.getElementById("langToggle");
+        const currentLang = document.getElementById("currentLang");
+
+        function setLanguage(lang) {
+          const select = document.querySelector("select.goog-te-combo");
+          if (!select) return;
+
+          select.value = lang;
+          select.dispatchEvent(new Event("change"));
+
+          localStorage.setItem("siteLang", lang);
+          if (currentLang) {
+            currentLang.textContent = lang === "ar" ? "العربية" : "English";
+          }
+        }
+
+        // Restore saved language
+        const savedLang = localStorage.getItem("siteLang");
+        if (savedLang) {
+          setTimeout(() => setLanguage(savedLang), 500);
+        }
+
+        if (langToggle) {
+          langToggle.addEventListener("click", () => {
+            const next =
+              localStorage.getItem("siteLang") === "ar" ? "en" : "ar";
+            setLanguage(next);
+          });
+        }
+
+        /* ---------- KILL GOOGLE TOP BAR (PERMANENT) ---------- */
+        (function removeGoogleBar() {
+          const interval = setInterval(() => {
+            const iframe = document.querySelector(".goog-te-banner-frame");
+            if (iframe) {
+              iframe.remove();
+              document.body.style.top = "0px";
+              clearInterval(interval);
+            }
+          }, 100);
+        })();
+      });
     </script>
+
 </body>
 </html>

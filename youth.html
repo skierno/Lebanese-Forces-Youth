@@ -375,122 +375,77 @@
 </footer>
 
 <!-- ================= JS ================= -->
-<script>
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+  <script>
+  fetch("nav.html")
+    .then(res => res.text())
+    .then(html => {
+      // Inject shared nav
+      document.getElementById("nav-placeholder").innerHTML = html;
 
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-    });
+      /* ---------- NAV BEHAVIOR ---------- */
+      const navScript = document.createElement("script");
+      navScript.src = "nav.js";
+      document.body.appendChild(navScript);
 
-    function openGallery() {
-        document.getElementById('galleryModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
+      /* ---------- GOOGLE TRANSLATE ---------- */
+      window.googleTranslateElementInit = function () {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,ar",
+            autoDisplay: false
+          },
+          "google_translate_element"
+        );
+      };
 
-    function closeGallery() {
-        document.getElementById('galleryModal').classList.add('hidden');
-        document.body.style.overflow = '';
-    }
+      const gt = document.createElement("script");
+      gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.body.appendChild(gt);
 
-    function playVideo(container) {
-        const video = container.querySelector('video');
-        container.querySelector('img').classList.add('hidden');
-        container.querySelector('div').classList.add('hidden');
-        video.classList.remove('hidden');
-        video.play();
-    }
+      /* ---------- WIRE TO YOUR BUTTON ---------- */
+      const langToggle = document.getElementById("langToggle");
+      const currentLang = document.getElementById("currentLang");
 
-    function loadReel(container, id) {
-        container.innerHTML = `
-            <iframe src="https://www.instagram.com/reel/${id}/embed?autoplay=1"
-                    class="w-full h-[480px] rounded-lg"
-                    allowfullscreen loading="lazy"></iframe>`;
-    }
-</script>
-    <script>
-      const videos = document.querySelectorAll('.auto-pause-video');
+      function setLanguage(lang) {
+        const select = document.querySelector("select.goog-te-combo");
+        if (!select) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            const video = entry.target;
+        select.value = lang;
+        select.dispatchEvent(new Event("change"));
 
-            // If video leaves viewport, pause it
-            if (!entry.isIntersecting && !video.paused) {
-              video.pause();
-            }
-          });
-        },
-        {
-          threshold: 0.25 // pause when less than 25% visible
+        localStorage.setItem("siteLang", lang);
+        if (currentLang) {
+          currentLang.textContent = lang === "ar" ? "العربية" : "English";
         }
-      );
+      }
 
-      videos.forEach(video => observer.observe(video));
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
+      // Restore saved language
+      const savedLang = localStorage.getItem("siteLang");
+      if (savedLang) {
+        setTimeout(() => setLanguage(savedLang), 500);
+      }
 
-        /* ---------- Mobile Menu ---------- */
-        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-        const mobileMenu = document.getElementById("mobileMenu");
+      if (langToggle) {
+        langToggle.addEventListener("click", () => {
+          const next =
+            localStorage.getItem("siteLang") === "ar" ? "en" : "ar";
+          setLanguage(next);
+        });
+      }
 
-        if (mobileMenuBtn && mobileMenu) {
-          mobileMenuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("active");
-          });
-
-          document.addEventListener("click", (e) => {
-            if (
-              !mobileMenu.contains(e.target) &&
-              !mobileMenuBtn.contains(e.target)
-            ) {
-              mobileMenu.classList.remove("active");
-            }
-          });
-        }
-
-        /* ---------- Active Page Highlight ---------- */
-        const currentPath =
-          window.location.pathname.split("/").pop() || "index.html";
-
-        document.querySelectorAll(".nav-link").forEach(link => {
-          const linkPath = link.getAttribute("href");
-          if (linkPath === currentPath) {
-            link.classList.add("active");
+      /* ---------- KILL GOOGLE TOP BAR (PERMANENT) ---------- */
+      (function removeGoogleBar() {
+        const interval = setInterval(() => {
+          const iframe = document.querySelector(".goog-te-banner-frame");
+          if (iframe) {
+            iframe.remove();
+            document.body.style.top = "0px";
+            clearInterval(interval);
           }
-        });
-          // Language toggle
-          const langToggle = document.getElementById('langToggle');
-          const currentLang = document.getElementById('currentLang');
-
-          langToggle.addEventListener('click', function() {
-              const isEnglish = currentLang.textContent === 'English';
-              currentLang.textContent = isEnglish ? 'العربية' : 'English';
-
-              // Toggle text direction
-              document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
-              document.documentElement.lang = isEnglish ? 'ar' : 'en';
-
-              // Show coming soon message for Arabic
-              if (isEnglish) {
-                  alert('Arabic version coming soon! / النسخة العربية قريباً!');
-              }
-          });
-    </script>
-    <script>
-      fetch("nav.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("nav-placeholder").innerHTML = html;
-
-          // After nav loads, load nav.js so it can find the elements
-          const s = document.createElement("script");
-          s.src = "nav.js";
-          document.body.appendChild(s);
-        });
-    </script>
-
+        }, 100);
+      })();
+    });
+  </script>
 </body>
 </html>

@@ -591,215 +591,77 @@
 
     <!-- JavaScript -->
     <script>
-    /* MOBILE MENU (unchanged) */
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => {
+        // Inject shared nav
+        document.getElementById("nav-placeholder").innerHTML = html;
 
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('active');
-        });
+        /* ---------- NAV BEHAVIOR ---------- */
+        const navScript = document.createElement("script");
+        navScript.src = "nav.js";
+        document.body.appendChild(navScript);
 
-        document.addEventListener('click', function (e) {
-            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                mobileMenu.classList.remove('active');
-            }
-        });
-    }
+        /* ---------- GOOGLE TRANSLATE ---------- */
+        window.googleTranslateElementInit = function () {
+          new google.translate.TranslateElement(
+            {
+              pageLanguage: "en",
+              includedLanguages: "en,ar",
+              autoDisplay: false
+            },
+            "google_translate_element"
+          );
+        };
 
-    /* ARABIC TRANSLATION SYSTEM (added) */
-    const translations = {
-        en: {
-            nav_home: "Home",
-            nav_timeline: "Timeline",
-            nav_comparison: "Comparison",
-            nav_news: "News",
-            nav_join: "Join",
-            hero_title: "Historical Timeline",
-            hero_subtitle: "Complete history of Lebanese Forces from 1976 formation to present day - including all major wars, political developments, and key milestones",
-            btn_back_home: "Back to Home",
-            btn_compare_parties: "Compare Parties",
-            timeline_heading: "Lebanese Forces Historical Timeline",
-            timeline_intro: "From formation in 1976 through present day - all major events, wars, and political developments",
-            year_1976: "1976",
-            year_1978: "1978",
-            year_1981: "1981",
-            year_1982: "1982",
-            year_1982_1986: "1982-1986",
-            year_1986: "1986",
-            year_1988: "1988",
-            year_1989: "1989",
-            year_1994: "1994",
-            year_1997: "1997",
-            year_2005: "2005",
-            year_2009: "2009",
-            year_2018: "2018",
-            year_2019: "2019",
-            year_2022: "2022",
-            year_2022_present: "2022-Present",
-            loc_beirut_lebanon: "Beirut, Lebanon",
-            loc_achrafiye_beirut: "Achrafiye, Beirut",
-            loc_zahle_lebanon: "Zahle, Lebanon",
-            loc_harrissa_lebanon: "Harrissa, Lebanon",
-            loc_lebanon: "Lebanon",
-            e1976_title: "Formation of Lebanese Forces",
-            e1976_desc: "Bashir Gemayel unifies various Christian militias (Kataeb, Tigers, Guardians of the Cedars) into the Lebanese Forces during the Lebanese Civil War, creating a unified Christian military and political force.",
-            e1978_title: "Hundred Days War",
-            e1978_desc: "Lebanese Forces defend Achrafiye district against Syrian-backed forces in a prolonged 100-day siege, demonstrating LF determination and resilience against overwhelming odds.",
-            e1981_title: "Zahle War",
-            e1981_desc: "Major conflict erupts in Zahle as Syrian forces attempt to take control of the strategic Bekaa Valley city. Lebanese Forces under Samir Geagea's command, allied with local Christian militias, successfully defend Zahle against Syrian military assaults. Samir Geagea leads the defense operations and emerges as a key military commander.",
-            e1982_title: "Bashir Gemayel Elected President",
-            e1982_desc: "Bashir Gemayel is elected President of Lebanon, representing the peak of Lebanese Forces political influence. His election marks a historic moment for the Christian community in Lebanon.",
-            e1982a_title: "Assassination of Bashir Gemayel",
-            e1982a_desc: "President-elect Bashir Gemayel is assassinated in a bombing at Phalangist headquarters, just three weeks after his election. This creates a leadership vacuum in the Lebanese Forces.",
-            e1982_1986_title: "Leadership Transition Period",
-            e1982_1986_desc: "Following Bashir's assassination, leadership transitions through several figures including Dr. Fuad Abu Nader and Elie Hobeika. Internal power struggles and external pressures create instability until Samir Geagea consolidates control in 1986.",
-            e1986_title: "Samir Geagea Takes Leadership",
-            e1986_desc: "Samir Geagea assumes leadership of the Lebanese Forces after internal power struggles, marking the beginning of his long-term leadership that would continue for decades.",
-            e1989_title: "War of Elimination (One Week War)",
-            e1989_desc: "Intense conflict erupts between Lebanese Forces under Samir Geagea and General Michel Aoun's forces. The one-week war represents the final major confrontation between Christian factions, with LF forces emerging victorious.",
-            e1990_title: "War with President Aoun",
-            e1990_desc: "Conflict erupts between Lebanese Forces under Samir Geagea and General Michel Aoun (acting as Prime Minister/President). The Lebanese Forces oppose Aoun's attempts to consolidate power and maintain Christian independence from Syrian influence.",
-            e1994_title: "Samir Geagea Imprisoned (1994-2005)",
-            e1994_desc: "Samir Geagea is arrested and sentenced to life imprisonment on politically motivated charges orchestrated by the Syrian regime. During his 11-year imprisonment, Lebanese Forces operates secretly through dedicated members who maintain party structure and preserve the movement's principles.",
-            e2005_title: "Cedar Revolution & Geagea Release",
-            e2005_desc: "Following the assassination of Rafik Hariri, mass protests force Syrian withdrawal from Lebanon. Samir Geagea is released from prison after 11 years. Lebanese Forces re-legalized and re-emerges as major political force.",
-            e1997_title: "John Paul II Secret Harrissa Event",
-            e1997_desc: "Lebanese Forces Youth organizes a secret gathering in Harrissa during Pope John Paul II's visit to Lebanon. Despite the official ban on LF activities, the youth movement demonstrates its organizational capability and deep connection to Christian heritage through this clandestine event.",
-            e2009_title: "Parliamentary Gains Continue",
-            e2009_desc: "Lebanese Forces maintains its position as a key opposition force, gaining additional parliamentary seats and establishing itself as the primary Christian alternative to the March 8 Alliance.",
-            e2018_title: "2018 Parliamentary Elections",
-            e2018_desc: "Lebanese Forces achieves significant gains in the 2018 parliamentary elections, securing 15 seats and becoming a major force in parliament. While not the largest bloc, LF establishes itself as the primary Christian opposition to the March 8 Alliance.",
-            e2019_title: "October Revolution Support",
-            e2019_desc: "Lebanese Forces supports the October 17 Revolution protests against corruption and economic mismanagement, withdrawing its ministers from government and standing with the people's demands for reform.",
-            e2022_title: "2022 Parliamentary Elections",
-            e2022_desc: "In the 2022 parliamentary elections, Lebanese Forces maintains its position as a major Christian political force, though facing challenges from new political movements. The party continues to advocate for sovereignty and reform in Lebanon's complex political landscape.",
-            e2022p_title: "Current Era",
-            e2022p_desc: "Lebanese Forces continues as Lebanon's largest Christian political party, advocating for sovereignty, democracy, and reform. The party maintains significant parliamentary representation and remains a key voice for Christian interests and Lebanese sovereignty.",
-            cta_title: "Learn More About Lebanese Forces",
-            cta_desc: "Explore our comprehensive resources and understand the complete history of Lebanon's largest Christian political party",
-            footer_title: "Lebanese Forces Youth USA - Educational Platform",
-            footer_desc: "Educational platform for understanding Lebanese politics and the role of the Lebanese Forces Youth movement",
-            footer_ig: "Follow on Instagram",
-            footer_copy: "© 2025 Lebanese Forces Youth USA Educational Platform. Created for educational purposes."
-        },
-        ar: {
-            nav_home: "الرئيسية",
-            nav_timeline: "الخط الزمني",
-            nav_comparison: "مقارنة",
-            nav_news: "الأخبار",
-            nav_join: "انضم",
-            hero_title: "الخط الزمني التاريخي",
-            hero_subtitle: "التاريخ الكامل للقوات اللبنانية منذ تأسيسها عام 1976 حتى اليوم، بما في ذلك الحروب الكبرى والتطورات السياسية والمحطات الأساسية",
-            btn_back_home: "العودة إلى الرئيسية",
-            btn_compare_parties: "مقارنة الأحزاب",
-            timeline_heading: "الخط الزمني التاريخي للقوات اللبنانية",
-            timeline_intro: "من التأسيس عام 1976 حتى اليوم — أبرز الأحداث والحروب والتطورات السياسية",
-            year_1976: "١٩٧٦",
-            year_1978: "١٩٧٨",
-            year_1981: "١٩٨١",
-            year_1982: "١٩٨٢",
-            year_1982_1986: "١٩٨٢-١٩٨٦",
-            year_1986: "١٩٨٦",
-            year_1989: "١٩٨٩",
-            year_1990: "١٩٩٠",
-            year_1994: "١٩٩٤",
-            year_1997: "١٩٩٧",
-            year_2005: "٢٠٠٥",
-            year_2009: "٢٠٠٩",
-            year_2018: "٢٠١٨",
-            year_2019: "٢٠١٩",
-            year_2022: "٢٠٢٢",
-            year_2022_present: "٢٠٢٢-حتى اليوم",
-            loc_beirut_lebanon: "بيروت، لبنان",
-            loc_achrafiye_beirut: "الأشرفية، بيروت",
-            loc_zahle_lebanon: "زحلة، لبنان",
-            loc_harrissa_lebanon: "حريصا، لبنان",
-            loc_lebanon: "لبنان",
-            e1976_title: "تأسيس القوات اللبنانية",
-            e1976_desc: "قام بشير الجميل بتوحيد عدد من الميليشيات المسيحية (الكتائب، النمور، حراس الأرز) ضمن إطار القوات اللبنانية خلال الحرب الأهلية اللبنانية، لتشكيل قوة عسكرية وسياسية مسيحية موحّدة.",
-            e1978_title: "حرب المئة يوم",
-            e1978_desc: "دافعت القوات اللبنانية عن منطقة الأشرفية في مواجهة قوى مدعومة من سوريا خلال حصار استمر 100 يوم، مُظهرةً صمودًا وإرادةً قوية رغم الظروف الصعبة.",
-            e1982_title: "انتخاب بشير الجميل رئيسًا",
-            e1982_desc: "انتُخب بشير الجميل رئيسًا للجمهورية اللبنانية، في ذروة الحضور السياسي للقوات اللبنانية، وكانت محطة بارزة في تاريخ المجتمع المسيحي في لبنان.",
-            e1982a_title: "اغتيال بشير الجميل",
-            e1982a_desc: "اغتيل الرئيس المنتخب بشير الجميل بتفجير في مقر حزب الكتائب بعد ثلاثة أسابيع فقط من انتخابه، ما أدى إلى فراغ قيادي داخل القوات اللبنانية.",
-            e1982_1986_title: "مرحلة الانتقال القيادي",
-            e1982_1986_desc: "بعد اغتيال بشير، تعاقبت قيادات عدة من بينها الدكتور فؤاد أبو ناضر وإيلي حبيقة. أدت الصراعات الداخلية والضغوط الخارجية إلى حالة عدم استقرار حتى رسّخ سمير جعجع السيطرة عام 1986.",
-            e1986_title: "تولي سمير جعجع القيادة",
-            e1986_desc: "تولى سمير جعجع قيادة القوات اللبنانية بعد صراعات داخلية، لتبدأ مرحلة قيادة طويلة امتدت لسنوات عديدة.",
-            e1981_title: "حرب زحلة",
-            e1981_desc: "اندلع صراع كبير في زحلة مع محاولة القوات السورية السيطرة على المدينة الاستراتيجية في البقاع. تمكنت القوات اللبنانية بقيادة سمير جعجع وبالتعاون مع مجموعات محلية من الدفاع عن زحلة في وجه الهجمات، وبرز جعجع كقائد عسكري أساسي.",
-            e1989_title: "حرب الإلغاء (حرب الأسبوع)",
-            e1989_desc: "اندلع قتال عنيف بين القوات اللبنانية بقيادة سمير جعجع وقوات العماد ميشال عون. مثّلت هذه الحرب مواجهة كبرى بين الفصائل المسيحية، وانتهت بتفوّق القوات اللبنانية.",
-            e1990_title: "الحرب مع الرئيس عون",
-            e1990_desc: "اندلع صراع بين القوات اللبنانية بقيادة سمير جعجع والعماد ميشال عون (رئيس الحكومة/الرئيس بالوكالة آنذاك). عارضت القوات اللبنانية محاولات عون توحيد السلطة والحفاظ على استقلال القرار المسيحي عن النفوذ السوري.",
-            e1994_title: "سجن سمير جعجع (1994-2005)",
-            e1994_desc: "أُلقي القبض على سمير جعجع وصدر بحقه حكم بالسجن المؤبد بتهم ذات طابع سياسي خلال هيمنة النظام السوري. وخلال 11 عامًا، استمرت القوات اللبنانية سرًا عبر كوادر حافظت على الهيكل التنظيمي والمبادئ.",
-            e2005_title: "ثورة الأرز وإطلاق سراح جعجع",
-            e2005_desc: "بعد اغتيال رفيق الحريري، أدت الاحتجاجات الشعبية إلى انسحاب الجيش السوري من لبنان. أُطلق سراح سمير جعجع بعد 11 عامًا، وأعيدت شرعية القوات اللبنانية وعادت كقوة سياسية رئيسية.",
-            e1997_title: "حدث حريصا السري خلال زيارة البابا يوحنا بولس الثاني",
-            e1997_desc: "نظم شباب القوات اللبنانية تجمعًا سريًا في حريصا خلال زيارة البابا يوحنا بولس الثاني إلى لبنان. رغم الحظر الرسمي على نشاطات القوات، أثبت الشباب قدرته التنظيمية وارتباطه بالإرث المسيحي عبر هذا الحدث.",
-            e2009_title: "استمرار المكاسب النيابية",
-            e2009_desc: "حافظت القوات اللبنانية على موقعها كقوة معارضة أساسية، وعززت حضورها النيابي، وبرزت كبديل مسيحي رئيسي لتحالف 8 آذار.",
-            e2018_title: "الانتخابات النيابية 2018",
-            e2018_desc: "حققت القوات اللبنانية مكاسب مهمة في انتخابات 2018 بحصولها على 15 مقعدًا، وأصبحت قوة مؤثرة في البرلمان. ورغم عدم كونها الكتلة الأكبر، رسخت موقعها كمعارضة مسيحية رئيسية لتحالف 8 آذار.",
-            e2019_title: "دعم انتفاضة تشرين",
-            e2019_desc: "دعمت القوات اللبنانية احتجاجات 17 تشرين ضد الفساد وسوء الإدارة الاقتصادية، وانسحب وزراؤها من الحكومة وساندت مطالب الناس بالإصلاح.",
-            e2022_title: "الانتخابات النيابية 2022",
-            e2022_desc: "في انتخابات 2022، حافظت القوات اللبنانية على موقعها كقوة مسيحية سياسية كبرى رغم تحديات الحركات الجديدة، واستمرت في الدعوة إلى السيادة والإصلاح ضمن المشهد السياسي المعقد.",
-            e2022p_title: "المرحلة الحالية",
-            e2022p_desc: "تواصل القوات اللبنانية دورها كأكبر حزب سياسي مسيحي في لبنان، داعيةً إلى السيادة والديمقراطية والإصلاح، مع تمثيل نيابي وازن وصوت بارز في الشأن الوطني.",
-            cta_title: "تعرّف أكثر على القوات اللبنانية",
-            cta_desc: "استكشف مواردنا الشاملة وافهم التاريخ الكامل لأكبر حزب سياسي مسيحي في لبنان",
-            footer_title: "شباب القوات اللبنانية - منصة تعليمية",
-            footer_desc: "منصة تعليمية لفهم السياسة اللبنانية ودور حركة شباب القوات اللبنانية",
-            footer_ig: "تابعنا على إنستغرام",
-            footer_copy: "© 2025 منصة شباب القوات اللبنانية التعليمية. أُنشئت لأغراض تعليمية."
+        const gt = document.createElement("script");
+        gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(gt);
+
+        /* ---------- WIRE TO YOUR BUTTON ---------- */
+        const langToggle = document.getElementById("langToggle");
+        const currentLang = document.getElementById("currentLang");
+
+        function setLanguage(lang) {
+          const select = document.querySelector("select.goog-te-combo");
+          if (!select) return;
+
+          select.value = lang;
+          select.dispatchEvent(new Event("change"));
+
+          localStorage.setItem("siteLang", lang);
+          if (currentLang) {
+            currentLang.textContent = lang === "ar" ? "العربية" : "English";
+          }
         }
-    };
 
-    const langToggle = document.getElementById('langToggle');
-    const currentLang = document.getElementById('currentLang');
+        // Restore saved language
+        const savedLang = localStorage.getItem("siteLang");
+        if (savedLang) {
+          setTimeout(() => setLanguage(savedLang), 500);
+        }
 
-    // default language is English, do not change the page on load
-    let current = 'en';
+        if (langToggle) {
+          langToggle.addEventListener("click", () => {
+            const next =
+              localStorage.getItem("siteLang") === "ar" ? "en" : "ar";
+            setLanguage(next);
+          });
+        }
 
-    function applyLanguage(lang) {
-        current = lang;
-
-        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.documentElement.lang = lang === 'ar' ? 'ar' : 'en';
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            const next = translations[lang] && translations[lang][key];
-            if (typeof next === 'string') {
-                el.textContent = next;
+        /* ---------- KILL GOOGLE TOP BAR (PERMANENT) ---------- */
+        (function removeGoogleBar() {
+          const interval = setInterval(() => {
+            const iframe = document.querySelector(".goog-te-banner-frame");
+            if (iframe) {
+              iframe.remove();
+              document.body.style.top = "0px";
+              clearInterval(interval);
             }
-        });
-
-        currentLang.textContent = lang === 'ar' ? 'العربية' : 'English';
-    }
-
-    if (langToggle && currentLang) {
-        langToggle.addEventListener('click', function () {
-            applyLanguage(current === 'en' ? 'ar' : 'en');
-        });
-    }
+          }, 100);
+        })();
+      });
     </script>
-    <script>
-      fetch("nav.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("nav-placeholder").innerHTML = html;
 
-          // After nav loads, load nav.js so it can find the elements
-          const s = document.createElement("script");
-          s.src = "nav.js";
-          document.body.appendChild(s);
-        });
-    </script>
 </body>
 </html>
