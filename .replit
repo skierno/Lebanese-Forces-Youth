@@ -16,15 +16,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Flask Server"
+args = "Flask App"
 
 [[workflows.workflow]]
-name = "Flask Server"
+name = "Flask App"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python main.py"
+args = "cd \"Lebanese-Forces-Youth/OKComputerLi-Ba-Nen-Li-Liang-Wang-Zhan-Sheng-Ji-zipzip/OKComputerLi-Ba-Nen-Li-Liang-Wang-Zhan-Sheng-Ji-zip\" && uv run python main.py"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
@@ -33,3 +33,7 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[deployment]
+run = ["sh", "-c", "python3 -m http.server $PORT --directory \"Lebanese-Forces-Youth/OKComputerLi-Ba-Nen-Li-Liang-Wang-Zhan-Sheng-Ji-zipzip/OKComputerLi-Ba-Nen-Li-Liang-Wang-Zhan-Sheng-Ji-zip\""]
+deploymentTarget = "cloudrun"
