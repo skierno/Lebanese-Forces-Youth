@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who are we? – Lebanese Forces Youth USA</title>
+    <meta name="description" content="Learn about the Lebanese Forces Youth USA and explore photos and videos from our events.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon_io/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cedar-red': '#DC143C',
+                        'cedar-green': '#228B22',
+                        'phoenix-gold': '#FFD700',
+                        'mediterranean-blue': '#1a2332'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+<!-- ================= NAVIGATION (UNCHANGED) ================= -->
+    <!-- Navigation -->
+                <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <div class="flex justify-between items-center py-3">
+                            <!-- Logo -->
+                            <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                                <img
+                                  src="resources/logo.png"
+                                  alt="Lebanese Forces Youth USA Logo"
+                                  class="w-10 h-10 object-contain"
+                                />
+                                <div>
+                                    <h1 class="text-lg font-bold text-red-600" id="siteTitle">Lebanese Forces Youth USA</h1>
+                                    <p class="text-xs text-gray-500" id="siteSubtitle">Educational Platform</p>
+                                </div>
+                            </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_home">Home</a>
+                    <a href="timeline.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_timeline">Timeline</a>
+                    <a href="comparison.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_comparison">Comparison</a>
+                    <a href="news.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_news">News</a>
+                    <a href="join.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_join">Join</a>
+                    <a href="youth.html" class="text-red-600 font-medium" data-i18n="nav_youth">Who We Are</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Language Toggle -->
+                <div class="flex items-center space-x-4">
+                    <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
+                        <span id="currentLang">English</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
+            <div class="p-4">
+                <a href="index.html" class="block py-2 text-red-600 font-medium" id="mobileHome" data-i18n="nav_home">Home</a>
+                <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileTimeline" data-i18n="nav_timeline">Timeline</a>
+                <a href="comparison.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileComparison" data-i18n="nav_comparison">Comparison</a>
+                <a href="news.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileNews" data-i18n="nav_news">News</a>
+                <a href="join.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileJoin" data-i18n="nav_join">Join</a>
+                <a href="youth.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileYouth" data-i18n="nav_youth">Who We Are</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+        <section class="hero-bg text-white text-center py-20">
+
+          <!-- Logo -->
+          <div class="flex justify-center mb-6">
+            <img
+              src="resources/logo.png"
+              alt="Lebanese Forces Youth USA Logo"
+          </div>
+
+    <!-- Hero Section -->
+        <section class="hero-bg text-white text-center py-20">
+
+          <!-- Logo -->
+          <div class="flex justify-center mb-6">
+            <img
+              src="resources/logo.png"
+              alt="Lebanese Forces Youth USA Logo"
+              class="w-32 h-32 object-contain"
+            >
+          </div>
+
+<!-- ================= HERO ================= -->
+<section class="bg-gradient-to-r from-red-600 to-red-800 text-white text-center py-20">
+    <img src="resources/logo.png" class="mx-auto w-32 h-32 object-contain mb-6" alt="LF Youth Logo">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        Lebanese Forces Youth Movement
+    </h1>
+    <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+        Educational platform for Lebanon's largest Christian political party youth movement – advocating for sovereignty, democracy, and a strong Lebanese state.
+    </p>
+</section>
+
+<!-- ================= WHO WE ARE ================= -->
+<section class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center mb-8">Who We Are</h2>
+    <div class="max-w-4xl mx-auto text-gray-700 text-lg space-y-5 leading-relaxed">
+        <p>
+            The Lebanese Forces Youth Movement represents the younger generation of Lebanon’s largest Christian political party. It serves as a platform for education, political engagement, and national awareness.
+        </p>
+        <p>
+            Through events, discussions, training sessions, and community initiatives, the youth movement prepares future leaders committed to sovereignty, democracy, and a strong Lebanese state.
+        </p>
+    </div>
+</section>
+
+<!-- ================= PHOTO GALLERY ================= -->
+<section class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-10">Events & Activities</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+            <img loading="lazy" src="resources/youth/photos/photo1.jpg" onclick="openGallery()" class="cursor-pointer rounded-lg shadow object-cover h-64 w-full">
+            <img loading="lazy" src="resources/youth/photos/photo2.jpg" onclick="openGallery()" class="cursor-pointer rounded-lg shadow object-cover h-64 w-full">
+            <img loading="lazy" src="resources/youth/photos/photo3.jpg" onclick="openGallery()" class="cursor-pointer rounded-lg shadow object-cover h-64 w-full">
+        </div>
+
+        <div class="text-center">
+            <button onclick="openGallery()" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700">
+                View Full Gallery
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FULL GALLERY MODAL ================= -->
+<div id="galleryModal" class="fixed inset-0 bg-black bg-opacity-80 hidden z-50 overflow-y-auto">
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        <div class="flex justify-end mb-6">
+            <button onclick="closeGallery()" class="text-white text-3xl">&times;</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <img loading="lazy" src="resources/youth/photos/photo1.jpg" class="rounded-lg h-64 w-full object-cover">
+            <img loading="lazy" src="resources/youth/photos/photo2.jpg" class="rounded-lg h-64 w-full object-cover">
+            <img loading="lazy" src="resources/youth/photos/photo3.jpg" class="rounded-lg h-64 w-full object-cover">
+            <img loading="lazy" src="resources/youth/photos/photo4.jpg" class="rounded-lg h-64 w-full object-cover">
+            <img loading="lazy" src="resources/youth/photos/photo5.jpg" class="rounded-lg h-64 w-full object-cover">
+            <img loading="lazy" src="resources/youth/photos/photo6.jpg" class="rounded-lg h-64 w-full object-cover">
+        </div>
+    </div>
+</div>
+
+<!-- ================= VIDEOS (THUMBNAIL → PLAY) ================= -->
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-10">Videos From Our Events</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="relative cursor-pointer" onclick="playVideo(this)">
+                <img src="resources/youth/videos/video1-poster.jpg" class="rounded-lg shadow w-full">
+                <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
+                <video class="hidden w-full rounded-lg" controls preload="none">
+                    <source src="resources/youth/videos/video1.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="relative cursor-pointer" onclick="playVideo(this)">
+                <img src="resources/youth/videos/video2-poster.jpg" class="rounded-lg shadow w-full">
+                <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
+                <video class="hidden w-full rounded-lg" controls preload="none">
+                    <source src="resources/youth/videos/video2.mp4" type="video/mp4">
+                </video>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= INSTAGRAM REELS ================= -->
+<section class="bg-gray-900 py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-white text-center mb-10">Youth Movement on Instagram</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div onclick="loadReel(this,'REEL_ID_1')" class="cursor-pointer">
+                <img src="resources/youth/reels/reel1.jpg" class="rounded-lg">
+            </div>
+            <div onclick="loadReel(this,'REEL_ID_2')" class="cursor-pointer">
+                <img src="resources/youth/reels/reel2.jpg" class="rounded-lg">
+            </div>
+            <div onclick="loadReel(this,'REEL_ID_3')" class="cursor-pointer">
+                <img src="resources/youth/reels/reel3.jpg" class="rounded-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER (UNCHANGED) ================= -->
+<footer class="bg-gray-800 text-white py-12 text-center">
+    <img src="resources/logo.png" class="mx-auto w-16 h-16 mb-4">
+    <p class="text-gray-300 max-w-2xl mx-auto text-sm">
+        Educational platform for Lebanon's largest Christian political party youth movement, advocating for sovereignty, democracy, and a strong Lebanese state.
+    </p>
+</footer>
+
+<!-- ================= JS ================= -->
+<script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+    });
+
+    function openGallery() {
+        document.getElementById('galleryModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGallery() {
+        document.getElementById('galleryModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    function playVideo(container) {
+        const video = container.querySelector('video');
+        container.querySelector('img').classList.add('hidden');
+        container.querySelector('div').classList.add('hidden');
+        video.classList.remove('hidden');
+        video.play();
+    }
+
+    function loadReel(container, id) {
+        container.innerHTML = `
+            <iframe src="https://www.instagram.com/reel/${id}/embed?autoplay=1"
+                    class="w-full h-[480px] rounded-lg"
+                    allowfullscreen loading="lazy"></iframe>`;
+    }
+</script>
+
+</body>
+</html>
