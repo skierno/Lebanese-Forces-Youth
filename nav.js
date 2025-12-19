@@ -16,11 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Active page highlight (works for desktop + mobile)
-  const currentPath = window.location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".nav-link").forEach((link) => {
+  // ===== ACTIVE PAGE HIGHLIGHT (BULLETPROOF) =====
+  const currentURL = window.location.href;
+
+  document.querySelectorAll(".nav-link").forEach(link => {
     const href = link.getAttribute("href");
-    if (href === currentPath) {
+
+    if (
+      (href === "index.html" && (currentURL.endsWith("/") || currentURL.includes("index"))) ||
+      currentURL.includes(href.replace(".html", ""))
+    ) {
       link.classList.add("active");
     }
   });
