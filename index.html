@@ -337,6 +337,17 @@
 
             waitForGoogleSelectAndBind();
           });
+        // ----- Detect Google Translate bar and adjust nav -----
+        (function detectGoogleBar() {
+          const check = setInterval(() => {
+            const bar = document.querySelector(".goog-te-banner-frame");
+            if (bar) {
+              document.body.classList.add("has-google-bar");
+              clearInterval(check);
+            }
+          }, 100);
+        })();
+
         </script>
 
 </body>

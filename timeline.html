@@ -596,7 +596,7 @@
       .then(html => {
         document.getElementById("nav-placeholder").innerHTML = html;
 
-        // Load mobile menu behavior (your nav.js)
+        // Load nav behavior
         const navScript = document.createElement("script");
         navScript.src = "nav.js";
         document.body.appendChild(navScript);
@@ -613,7 +613,7 @@
         gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
         document.body.appendChild(gt);
 
-        // Wire YOUR button after Google creates the select
+        // Wire YOUR button
         const langToggle = document.getElementById("langToggle");
         const currentLang = document.getElementById("currentLang");
 
@@ -625,7 +625,9 @@
           select.dispatchEvent(new Event("change"));
 
           localStorage.setItem("siteLang", lang);
-          if (currentLang) currentLang.textContent = (lang === "ar") ? "العربية" : "English";
+          if (currentLang) {
+            currentLang.textContent = (lang === "ar") ? "العربية" : "English";
+          }
           return true;
         }
 
@@ -642,20 +644,31 @@
               const saved = localStorage.getItem("siteLang");
               if (saved) setLanguage(saved);
 
-              // Click handler
               if (langToggle) {
                 langToggle.addEventListener("click", () => {
-                  const next = (localStorage.getItem("siteLang") === "ar") ? "en" : "ar";
+                  const next =
+                    (localStorage.getItem("siteLang") === "ar") ? "en" : "ar";
                   setLanguage(next);
                 });
               }
             }
 
-            if (tries > 60) clearInterval(timer); // ~6 seconds max
+            if (tries > 60) clearInterval(timer);
           }, 100);
         }
 
         waitForGoogleSelectAndBind();
+
+        // ✅ Detect Google Translate bar AFTER everything exists
+        (function detectGoogleBar() {
+          const check = setInterval(() => {
+            const bar = document.querySelector(".goog-te-banner-frame");
+            if (bar) {
+              document.body.classList.add("has-google-bar");
+              clearInterval(check);
+            }
+          }, 100);
+        })();
       });
     </script>
 

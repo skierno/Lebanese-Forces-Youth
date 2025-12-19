@@ -147,7 +147,7 @@
     </div>
     <div class="relative cursor-pointer max-w-lg mx-auto" onclick="playVideo(this)">
         <img src="resources/youth/videos/mainvid-poster.jpg" class="rounded-lg shadow w-full">
-        <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
+        <div class="absolute inset-0 flex items-center justify-center text-red text-4xl">▶</div>
           <video
             class="hidden w-full rounded-lg auto-pause-video"
             controls
@@ -403,6 +403,26 @@
 
 <!-- ================= JS ================= -->
   <script>
+    (function blockGoogleTranslateBarForever() {
+      const kill = () => {
+        // Remove banner iframe
+        document.querySelectorAll("iframe.goog-te-banner-frame").forEach(el => el.remove());
+
+        // Force body back to normal
+        document.body.style.top = "0px";
+        document.body.style.position = "static";
+
+        // Remove injected style tags Google adds
+        document.querySelectorAll("style").forEach(style => {
+          if (style.innerHTML.includes("goog-te-banner")) {
+            style.remove();
+          }
+        });
+      };
+
+      // Run repeatedly because Google reinjects
+      setInterval(kill, 200);
+    })();
     fetch("nav.html")
       .then(r => r.text())
       .then(html => {

@@ -65,41 +65,39 @@ nav * {
   transform: translateX(0);
 }
 
-/* =========================
-   GOOGLE TRANSLATE (CRITICAL)
-========================= */
+/* ===== GOOGLE TRANSLATE NUCLEAR BLOCK ===== */
 
-/* Kill ALL Google UI */
-.goog-te-banner-frame,
-.goog-te-menu-frame,
-.goog-logo-link,
-.goog-te-gadget,
-.goog-te-combo,
-iframe[src*="translate.google"] {
+/* Hide banner iframe */
+iframe.goog-te-banner-frame {
   display: none !important;
-  pointer-events: none !important;
 }
 
-/* Prevent body offset from Google */
+/* Prevent body from being pushed */
 body {
+  position: static !important;
   top: 0 !important;
 }
 
-/* =========================
-   PAGE OFFSET (NAV HEIGHT)
-========================= */
-body {
-  padding-top: 64px;
-}
-/* Hide Google Translate UI (but do NOT kill the translator itself) */
+/* Hide all Google UI */
 .goog-te-banner-frame,
-.goog-te-menu-frame,
 .goog-logo-link,
 .goog-te-gadget,
 .goog-te-combo {
   display: none !important;
-  pointer-events: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
 }
+/* Default nav position */
+nav {
+  top: 0;
+  transition: top 0.3s ease;
+}
+
+/* When Google Translate bar is present */
+body.has-google-bar nav {
+  top: 40px; /* height of Google Translate bar */
+}
+
 
 body { top: 0 !important; }
 #galleryModal {
