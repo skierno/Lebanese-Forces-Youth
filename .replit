@@ -24,7 +24,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd \"Lebanese-Forces-Youth/OKComputerLi-Ba-Nen-Li-Liang-Wang-Zhan-Sheng-Ji-zipzip/OKComputerLi-Ba-Nen-Li-Liang-Wang-Zhan-Sheng-Ji-zip\" && uv run python main.py"
+args = "uv run python main.py"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
