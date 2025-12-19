@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="site.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who are we? – Lebanese Forces Youth USA</title>
@@ -51,72 +53,46 @@
         .mobile-menu.active {
             transform: translateX(0);
         }
+        #mobileGallery::-webkit-scrollbar {
+          display: none;
+        }
+        #mobileGallery {
+          scrollbar-width: none;
+        }
+        body {
+            padding-top: 70px;
+          }
+
+          .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+          }
+
+          .mobile-menu.active {
+            transform: translateX(0);
+          }
+
+          .nav-link {
+            color: #4b5563; /* gray-600 */
+            transition: color 0.2s ease;
+          }
+
+          .nav-link:hover {
+            color: #DC143C;
+          }
+
+          .nav-link.active {
+            color: #DC143C;
+            font-weight: 600;
+          }
     </style>
 </head>
 
 <body class="bg-gray-50">
 
 <!-- ================= NAVIGATION (UNCHANGED) ================= -->
-    <!-- Navigation -->
-                <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
-                    <div class="max-w-7xl mx-auto px-4">
-                        <div class="flex justify-between items-center py-3">
-                            <!-- Logo -->
-                            <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                                <img
-                                  src="resources/logo.png"
-                                  alt="Lebanese Forces Youth USA Logo"
-                                  class="w-10 h-10 object-contain"
-                                />
-                                <div>
-                                    <h1 class="text-lg font-bold text-red-600" id="siteTitle">Lebanese Forces Youth USA</h1>
-                                    <p class="text-xs text-gray-500" id="siteSubtitle">Educational Platform</p>
-                                </div>
-                            </a>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_home">Home</a>
-                    <a href="timeline.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_timeline">Timeline</a>
-                    <a href="comparison.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_comparison">Comparison</a>
-                    <a href="news.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_news">News</a>
-                    <a href="join.html" class="text-gray-600 hover:text-red-600" data-i18n="nav_join">Join</a>
-                    <a href="youth.html" class="text-red-600 font-medium" data-i18n="nav_youth">Who We Are</a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-red-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Language Toggle -->
-                <div class="flex items-center space-x-4">
-                    <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
-                        <span id="currentLang">English</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
-            <div class="p-4">
-                <a href="index.html" class="block py-2 text-red-600 font-medium" id="mobileHome" data-i18n="nav_home">Home</a>
-                <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileTimeline" data-i18n="nav_timeline">Timeline</a>
-                <a href="comparison.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileComparison" data-i18n="nav_comparison">Comparison</a>
-                <a href="news.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileNews" data-i18n="nav_news">News</a>
-                <a href="join.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileJoin" data-i18n="nav_join">Join</a>
-                <a href="youth.html" class="block py-2 text-gray-600 hover:text-red-600" id="mobileYouth" data-i18n="nav_youth">Who We Are</a>
-            </div>
-        </div>
-    </nav>
+    <!-- ================= NAVIGATION ================= -->
+    <div id="nav-placeholder"></div>
 
 <!-- ================= HERO ================= -->
             <section class="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
@@ -143,8 +119,8 @@
                       <a href="index.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-red-600 transition-colors" data-i18n="btn_back_home">
                           Back to Home
                       </a>
-                      <a href="comparison.html" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors" data-i18n="btn_compare_parties">
-                          Compare Parties
+                      <a href="timeline.html" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors" data-i18n="btn_compare_parties">
+                          See LF Timeline
                       </a>
 
               </div>
@@ -152,98 +128,243 @@
 
 <!-- ================= WHO WE ARE ================= -->
 <section class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-3xl font-bold text-center mb-8">Who We Are</h2>
-    <div class="max-w-4xl mx-auto text-gray-700 text-lg space-y-5 leading-relaxed">
+    <h2 class="text-3xl text-red-600 font-bold text-center mb-8">Who We Are</h2>
+    <div class="max-w-4xl mx-auto text-gray-600 text-lg space-y-5 leading-relaxed">
         <p>
-            The Lebanese Forces Youth Movement represents the younger generation of Lebanon’s largest Christian political party. It serves as a platform for education, political engagement, and national awareness.
+            The Lebanese Forces Youth Movement represents the younger generation of Lebanon’s largest Christian political party in the USA. It serves as a platform for education, political engagement, and national awareness.
         </p>
         <p>
-            Through events, discussions, training sessions, and community initiatives, the youth movement prepares future leaders committed to sovereignty, democracy, and a strong Lebanese state.
+            Through events, discussions, and community initiatives, the LF Youth USA prepares future leaders committed to sovereignty, democracy, and a strong Lebanese state through LF principles.
         </p>
+    </div>
+    <div class="relative cursor-pointer max-w-lg mx-auto" onclick="playVideo(this)">
+        <img src="resources/youth/videos/mainvid-poster.jpg" class="rounded-lg shadow w-full">
+        <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
+        <video class="auto-pause-video hidden w-full rounded-lg" controls preload="none">
+            <source src="resources/youth/videos/mainvid.mp4" type="video/mp4">
+        </video>
     </div>
 </section>
 
 <!-- ================= PHOTO GALLERY ================= -->
-<section class="bg-gray-100 py-16">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-10">Events & Activities</h2>
+    <section class="bg-gray-100 py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl text-red-600 font-bold text-center mb-10">
+          Events & Activities
+        </h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-            <img loading="lazy" src="resources/youth/photos/photo1.jpg" onclick="openGallery()" class="cursor-pointer rounded-lg shadow object-cover h-64 w-full">
-            <img loading="lazy" src="resources/youth/photos/photo2.jpg" onclick="openGallery()" class="cursor-pointer rounded-lg shadow object-cover h-64 w-full">
-            <img loading="lazy" src="resources/youth/photos/photo3.jpg" onclick="openGallery()" class="cursor-pointer rounded-lg shadow object-cover h-64 w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+
+          <!-- Photo 1 -->
+          <div class="text-center">
+            <img
+              loading="lazy"
+              src="resources/youth/photos/photo1.jpg"
+              onclick="openGallery()"
+              class="cursor-pointer rounded-lg shadow object-cover h-64 w-full"
+              alt="Youth Meeting at Convention"
+            >
+            <p class="mt-3 text-sm text-red-600">
+              Youth meeting at convention
+            </p>
+          </div>
+
+          <!-- Photo 2 -->
+          <div class="text-center">
+            <img
+              loading="lazy"
+              src="resources/youth/photos/photo3.jpg"
+              onclick="openGallery()"
+              class="cursor-pointer rounded-lg shadow object-cover h-64 w-full"
+              alt="Zoom meeting with Samir Geagea"
+            >
+            <p class="mt-3 text-sm text-red-600">
+              Zoom meeting with Samir Geagea
+            </p>
+          </div>
+
+          <!-- Photo 3 -->
+          <div class="text-center">
+            <img
+              loading="lazy"
+              src="resources/youth/photos/photo2.jpg"
+              onclick="openGallery()"
+              class="cursor-pointer rounded-lg shadow object-cover h-64 w-full"
+              alt="Youth picture at convention"
+            >
+            <p class="mt-3 text-sm text-red-600">
+              Youth at convention
+            </p>
+          </div>
+
         </div>
 
         <div class="text-center">
-            <button onclick="openGallery()" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700">
-                View Full Gallery
-            </button>
+          <button
+            onclick="openGallery()"
+            class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700"
+          >
+            View Full Gallery
+          </button>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- ================= FULL GALLERY MODAL ================= -->
-<div id="galleryModal" class="fixed inset-0 bg-black bg-opacity-80 hidden z-50 overflow-y-auto">
-    <div class="max-w-6xl mx-auto px-4 py-10">
-        <div class="flex justify-end mb-6">
-            <button onclick="closeGallery()" class="text-white text-3xl">&times;</button>
+
+<section>
+    <!-- ================= FULL GALLERY MODAL ================= -->
+    <div
+      id="galleryModal"
+      class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 overflow-y-auto"
+    >
+
+      <!-- Close Button -->
+      <button
+        onclick="closeGallery()"
+        class="fixed top-5 right-5 text-white text-4xl z-50 hover:opacity-80"
+        aria-label="Close gallery"
+      >
+        &times;
+      </button>
+
+      <!-- Gallery Content -->
+      <div class="max-w-5xl mx-auto px-6 py-16 space-y-20">
+
+        <!-- Image 1 -->
+        <div class="text-center">
+          <img
+            src="resources/youth/photos/photo1.jpg"
+            alt="Youth Meeting at Convention"
+            loading="lazy"
+            onclick="toggleZoom(this)"
+            class="mx-auto rounded-lg object-contain
+                   max-h-[80vh] w-auto
+                   cursor-zoom-in transition-transform duration-300"
+          >
+          <p class="mt-4 text-sm text-gray-300">
+              Youth Meeting at Convention
+          </p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <img loading="lazy" src="resources/youth/photos/photo1.jpg" class="rounded-lg h-64 w-full object-cover">
-            <img loading="lazy" src="resources/youth/photos/photo2.jpg" class="rounded-lg h-64 w-full object-cover">
-            <img loading="lazy" src="resources/youth/photos/photo3.jpg" class="rounded-lg h-64 w-full object-cover">
-            <img loading="lazy" src="resources/youth/photos/photo4.jpg" class="rounded-lg h-64 w-full object-cover">
-            <img loading="lazy" src="resources/youth/photos/photo5.jpg" class="rounded-lg h-64 w-full object-cover">
-            <img loading="lazy" src="resources/youth/photos/photo6.jpg" class="rounded-lg h-64 w-full object-cover">
+
+        <!-- Image 2 -->
+        <div class="text-center">
+          <img
+            src="resources/youth/photos/photo3.jpg"
+            alt="Youth at Zoom Meeting with Samir Geagea at Convention"
+            loading="lazy"
+            onclick="toggleZoom(this)"
+            class="mx-auto rounded-lg object-contain
+                   max-h-[80vh] w-auto
+                   cursor-zoom-in transition-transform duration-300"
+          >
+          <p class="mt-4 text-sm text-gray-300">
+              Youth at Zoom Meeting with Samir Geagea at Convention
+          </p>
         </div>
+
+        <!-- Image 3 -->
+        <div class="text-center">
+          <img
+            src="resources/youth/photos/photo2.jpg"
+            alt="Youth Picture at Convention"
+            loading="lazy"
+            onclick="toggleZoom(this)"
+            class="mx-auto rounded-lg object-contain
+                   max-h-[80vh] w-auto
+                   cursor-zoom-in transition-transform duration-300"
+          >
+          <p class="mt-4 text-sm text-gray-300">
+              Youth Picture at Convention
+          </p>
+        </div>
+
+        <!-- Image 4 -->
+        
+
+        <!-- Add more images in order -->
+      </div>
     </div>
-</div>
+    </section>
 
 <!-- ================= VIDEOS (THUMBNAIL → PLAY) ================= -->
-<section class="py-16">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-10">Videos From Our Events</h2>
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-10 text-red-600">
+          Videos From Our Events
+        </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="flex justify-center">
+          <div class="grid grid-cols-2 gap-12">
 
-            <div class="relative cursor-pointer" onclick="playVideo(this)">
-                <img src="resources/youth/videos/video1-poster.jpg" class="rounded-lg shadow w-full">
-                <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
-                <video class="hidden w-full rounded-lg" controls preload="none">
-                    <source src="resources/youth/videos/video1.mp4" type="video/mp4">
-                </video>
+            <!-- Video 1 -->
+            <div class="relative cursor-pointer w-[290px]" onclick="playVideo(this)">
+              <img
+                src="resources/youth/videos/video1-poster.jpg"
+                class="rounded-lg shadow w-full aspect-[9/16] object-cover"
+              >
+              <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
+              <video class="hidden w-full rounded-lg aspect-[9/16] object-cover auto-pause-video" controls preload="none">
+                <source src="resources/youth/videos/video1.mp4" type="video/mp4">
+              </video>
             </div>
 
-            <div class="relative cursor-pointer" onclick="playVideo(this)">
-                <img src="resources/youth/videos/video2-poster.jpg" class="rounded-lg shadow w-full">
-                <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
-                <video class="hidden w-full rounded-lg" controls preload="none">
-                    <source src="resources/youth/videos/video2.mp4" type="video/mp4">
-                </video>
+            <!-- Video 2 -->
+            <div class="relative cursor-pointer w-[290px]" onclick="playVideo(this)">
+              <img
+                src="resources/youth/videos/video2-poster.jpg"
+                class="rounded-lg shadow w-full aspect-[9/16] object-cover"
+              >
+              <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
+              <video class="hidden w-full rounded-lg aspect-[9/16] object-cover auto-pause-video" controls preload="none">
+                <source src="resources/youth/videos/video2.mp4" type="video/mp4">
+              </video>
             </div>
 
+          </div>
         </div>
-    </div>
-</section>
+      </div>
 
-<!-- ================= INSTAGRAM REELS ================= -->
-<section class="bg-gray-900 py-16">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-white text-center mb-10">Youth Movement on Instagram</h2>
+    </section>
+
+
+    <!-- ================= INSTAGRAM REELS ================= -->
+    <section class="bg-gray-900 py-16">
+      <div class="max-w-7xl mx-auto px-4">
+
+        <h2 class="text-3xl font-bold text-white text-center mb-10">
+          Youth Movement on Instagram
+        </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div onclick="loadReel(this,'REEL_ID_1')" class="cursor-pointer">
-                <img src="resources/youth/reels/reel1.jpg" class="rounded-lg">
-            </div>
-            <div onclick="loadReel(this,'REEL_ID_2')" class="cursor-pointer">
-                <img src="resources/youth/reels/reel2.jpg" class="rounded-lg">
-            </div>
-            <div onclick="loadReel(this,'REEL_ID_3')" class="cursor-pointer">
-                <img src="resources/youth/reels/reel3.jpg" class="rounded-lg">
-            </div>
+
+          <!-- Reel 1 -->
+          <iframe
+            src="https://www.instagram.com/reel/DRKXDFnAZHX/embed"
+            class="w-full h-[620px] rounded-lg"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+
+          <!-- Reel 2 -->
+          <iframe
+            src="https://www.instagram.com/reel/DRLbhuuAsKS/embed"
+            class="w-full h-[620px] rounded-lg"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+
+          <!-- Reel 3 -->
+          <iframe
+            src="https://www.instagram.com/reel/DRL96KggY_9/embed"
+            class="w-full h-[620px] rounded-lg"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
+
         </div>
-    </div>
-</section>
+      </div>
+    </section>
+
 
 <!-- ================= FOOTER (UNCHANGED) ================= -->
 <footer class="bg-gray-800 text-white py-12 text-center">
@@ -287,6 +408,89 @@
                     allowfullscreen loading="lazy"></iframe>`;
     }
 </script>
+    <script>
+      const videos = document.querySelectorAll('.auto-pause-video');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            const video = entry.target;
+
+            // If video leaves viewport, pause it
+            if (!entry.isIntersecting && !video.paused) {
+              video.pause();
+            }
+          });
+        },
+        {
+          threshold: 0.25 // pause when less than 25% visible
+        }
+      );
+
+      videos.forEach(video => observer.observe(video));
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+
+        /* ---------- Mobile Menu ---------- */
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+          });
+
+          document.addEventListener("click", (e) => {
+            if (
+              !mobileMenu.contains(e.target) &&
+              !mobileMenuBtn.contains(e.target)
+            ) {
+              mobileMenu.classList.remove("active");
+            }
+          });
+        }
+
+        /* ---------- Active Page Highlight ---------- */
+        const currentPath =
+          window.location.pathname.split("/").pop() || "index.html";
+
+        document.querySelectorAll(".nav-link").forEach(link => {
+          const linkPath = link.getAttribute("href");
+          if (linkPath === currentPath) {
+            link.classList.add("active");
+          }
+        });
+          // Language toggle
+          const langToggle = document.getElementById('langToggle');
+          const currentLang = document.getElementById('currentLang');
+
+          langToggle.addEventListener('click', function() {
+              const isEnglish = currentLang.textContent === 'English';
+              currentLang.textContent = isEnglish ? 'العربية' : 'English';
+
+              // Toggle text direction
+              document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
+              document.documentElement.lang = isEnglish ? 'ar' : 'en';
+
+              // Show coming soon message for Arabic
+              if (isEnglish) {
+                  alert('Arabic version coming soon! / النسخة العربية قريباً!');
+              }
+          });
+    </script>
+    <script>
+      fetch("nav.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("nav-placeholder").innerHTML = html;
+
+          // After nav loads, load nav.js so it can find the elements
+          const s = document.createElement("script");
+          s.src = "nav.js";
+          document.body.appendChild(s);
+        });
+    </script>
 
 </body>
 </html>

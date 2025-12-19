@@ -1,0 +1,16 @@
+body { padding-top: 70px; }
+
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.mobile-menu.active {
+  transform: translateX(0);
+}
+
+.nav-link {
+  color: #4b5563; /* gray-600 */
+  transition: color 0.2s ease;
+}
+.nav-link:hover { color: #DC143C; }
+.nav-link.active { color: #DC143C; font-weight: 600; }

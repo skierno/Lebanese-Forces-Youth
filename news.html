@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <link rel="stylesheet" href="site.css">
+
     <!-- Favicon -->
     <link rel="icon" href="/favicon_io/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
@@ -164,67 +166,38 @@
             background: #ef4444;
             color: white;
         }
+        body {
+            padding-top: 70px;
+          }
+
+          .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+          }
+
+          .mobile-menu.active {
+            transform: translateX(0);
+          }
+
+          .nav-link {
+            color: #4b5563; /* gray-600 */
+            transition: color 0.2s ease;
+          }
+
+          .nav-link:hover {
+            color: #DC143C;
+          }
+
+          .nav-link.active {
+            color: #DC143C;
+            font-weight: 600;
+          }
     </style>
 </head>
 <body class="bg-gray-50 font-body">
-    <!-- Navigation -->
-            <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="flex justify-between items-center py-3">
-                        <!-- Logo -->
-                        <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                            <img
-                              src="resources/logo.png"
-                              alt="Lebanese Forces Youth USA Logo"
-                              class="w-10 h-10 object-contain"
-                            />
-                            <div>
-                                <h1 class="text-lg font-bold text-red-600" id="siteTitle">Lebanese Forces Youth USA</h1>
-                                <p class="text-xs text-gray-500" id="siteSubtitle">Educational Platform</p>
-                            </div>
-                        </a>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-gray-600 hover:text-red-600">Home</a>
-                    <a href="timeline.html" class="text-gray-600 hover:text-red-600">Timeline</a>
-                    <a href="comparison.html" class="text-gray-600 hover:text-red-600">Comparison</a>
-                    <a href="news.html" class="text-red-600 font-medium">News</a>
-                    <a href="join.html" class="text-gray-600 hover:text-red-600">Join</a>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobileMenuBtn" class="text-gray-600 hover:text-red-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Language Toggle -->
-                <div class="flex items-center space-x-4">
-                    <button id="langToggle" class="flex items-center space-x-1 px-3 py-2 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors">
-                        <span id="currentLang">English</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
-            <div class="p-4">
-                <a href="index.html" class="block py-2 text-gray-600 hover:text-red-600">Home</a>
-                <a href="timeline.html" class="block py-2 text-gray-600 hover:text-red-600">Timeline</a>
-                <a href="comparison.html" class="block py-2 text-gray-600 hover:text-red-600">Comparison</a>
-                <a href="news.html" class="block py-2 text-red-600 font-medium">News</a>
-                <a href="join.html" class="block py-2 text-gray-600 hover:text-red-600">Join</a>
-            </div>
-        </div>
-    </nav>
+    <!-- ================= NAVIGATION ================= -->
+    <div id="nav-placeholder"></div>
+
 
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-red-600 to-red-800 flex items-center justify-center text-white relative overflow-hidden pt-16">
@@ -957,38 +930,67 @@
 
     <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                mobileMenu.classList.remove('active');
+      document.addEventListener("DOMContentLoaded", () => {
+
+        /* ---------- Mobile Menu ---------- */
+        const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+          });
+
+          document.addEventListener("click", (e) => {
+            if (
+              !mobileMenu.contains(e.target) &&
+              !mobileMenuBtn.contains(e.target)
+            ) {
+              mobileMenu.classList.remove("active");
             }
+          });
+        }
+
+        /* ---------- Active Page Highlight ---------- */
+        const currentPath =
+          window.location.pathname.split("/").pop() || "index.html";
+
+        document.querySelectorAll(".nav-link").forEach(link => {
+          const linkPath = link.getAttribute("href");
+          if (linkPath === currentPath) {
+            link.classList.add("active");
+          }
         });
-        
-        // Language toggle
-        const langToggle = document.getElementById('langToggle');
-        const currentLang = document.getElementById('currentLang');
-        
-        langToggle.addEventListener('click', function() {
-            const isEnglish = currentLang.textContent === 'English';
-            currentLang.textContent = isEnglish ? 'العربية' : 'English';
-            
-            // Toggle text direction
-            document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
-            document.documentElement.lang = isEnglish ? 'ar' : 'en';
-            
-            // Show coming soon message for Arabic
-            if (isEnglish) {
-                alert('Arabic version coming soon! / النسخة العربية قريباً!');
-            }
+          // Language toggle
+          const langToggle = document.getElementById('langToggle');
+          const currentLang = document.getElementById('currentLang');
+
+          langToggle.addEventListener('click', function() {
+              const isEnglish = currentLang.textContent === 'English';
+              currentLang.textContent = isEnglish ? 'العربية' : 'English';
+
+              // Toggle text direction
+              document.documentElement.dir = isEnglish ? 'rtl' : 'ltr';
+              document.documentElement.lang = isEnglish ? 'ar' : 'en';
+
+              // Show coming soon message for Arabic
+              if (isEnglish) {
+                  alert('Arabic version coming soon! / النسخة العربية قريباً!');
+              }
+          });
+    </script>
+    <script>
+      fetch("nav.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("nav-placeholder").innerHTML = html;
+
+          // After nav loads, load nav.js so it can find the elements
+          const s = document.createElement("script");
+          s.src = "nav.js";
+          document.body.appendChild(s);
         });
     </script>
+
 </body>
 </html>

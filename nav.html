@@ -1,0 +1,49 @@
+<!-- Shared Navigation -->
+<nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center py-3">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+        <img src="resources/logo.png" alt="Lebanese Forces Youth Logo" class="w-10 h-10 object-contain">
+        <span class="font-semibold text-red-600 text-lg">Lebanese Forces Youth</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="youth.html" class="nav-link">Who We Are</a>
+        <a href="timeline.html" class="nav-link">Timeline</a>
+        <a href="comparison.html" class="nav-link">Comparison</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="join.html" class="nav-link">Join</a>
+      </div>
+
+      <!-- Right Side -->
+      <div class="flex items-center gap-3">
+        <!-- Language Toggle -->
+        <button id="langToggle" class="px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 transition">
+          <span id="currentLang">English</span>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden text-gray-700 text-2xl focus:outline-none" aria-label="Open menu">
+          ☰
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu md:hidden fixed top-16 right-0 w-64 h-screen bg-white shadow-lg z-40">
+    <div class="p-4 space-y-2">
+      <a href="index.html" class="nav-link block py-2">Home</a>
+      <a href="youth.html" class="nav-link block py-2">Who We Are</a>
+      <a href="timeline.html" class="nav-link block py-2">Timeline</a>
+      <a href="comparison.html" class="nav-link block py-2">Comparison</a>
+      <a href="news.html" class="nav-link block py-2">News</a>
+      <a href="join.html" class="nav-link block py-2">Join</a>
+    </div>
+  </div>
+</nav>
