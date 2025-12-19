@@ -22,9 +22,12 @@ nav {
 }
 
 /* Ensure nav ALWAYS receives taps */
-nav,
+nav {
+  pointer-events: auto;
+}
+
 nav * {
-  pointer-events: auto !important;
+  pointer-events: auto;
 }
 
 /* Nav links */

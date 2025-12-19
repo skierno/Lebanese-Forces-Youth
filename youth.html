@@ -33,6 +33,14 @@
     </script>
 
     <style>
+      video,
+      .gallery img,
+      .gallery-item,
+      [data-gallery] {
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 1;
+      }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             padding-top: 70px;
@@ -140,7 +148,13 @@
     <div class="relative cursor-pointer max-w-lg mx-auto" onclick="playVideo(this)">
         <img src="resources/youth/videos/mainvid-poster.jpg" class="rounded-lg shadow w-full">
         <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
-        <video class="auto-pause-video hidden w-full rounded-lg" controls preload="none">
+          <video
+            class="hidden w-full rounded-lg auto-pause-video"
+            controls
+            playsinline
+            muted
+            preload="metadata"
+          >
             <source src="resources/youth/videos/mainvid.mp4" type="video/mp4">
         </video>
     </div>
@@ -303,7 +317,13 @@
                 class="rounded-lg shadow w-full aspect-[9/16] object-cover"
               >
               <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
-              <video class="hidden w-full rounded-lg aspect-[9/16] object-cover auto-pause-video" controls preload="none">
+                <video
+                  class="hidden w-full rounded-lg auto-pause-video"
+                  controls
+                  playsinline
+                  muted
+                  preload="metadata"
+                >
                 <source src="resources/youth/videos/video1.mp4" type="video/mp4">
               </video>
             </div>
@@ -315,7 +335,13 @@
                 class="rounded-lg shadow w-full aspect-[9/16] object-cover"
               >
               <div class="absolute inset-0 flex items-center justify-center text-white text-4xl">▶</div>
-              <video class="hidden w-full rounded-lg aspect-[9/16] object-cover auto-pause-video" controls preload="none">
+                <video
+                  class="hidden w-full rounded-lg auto-pause-video"
+                  controls
+                  playsinline
+                  muted
+                  preload="metadata"
+                >
                 <source src="resources/youth/videos/video2.mp4" type="video/mp4">
               </video>
             </div>
@@ -443,5 +469,62 @@
         waitForGoogleSelectAndBind();
       });
     </script>
+  <script>
+  /* ================= VIDEO PLAY (THUMBNAIL → VIDEO) ================= */
+    function playVideo(container) {
+      const img = container.querySelector("img");
+      const video = container.querySelector("video");
+
+      if (!video) return;
+
+      // Hide thumbnail
+      if (img) img.style.display = "none";
+
+      // Show video
+      video.classList.remove("hidden");
+
+      // IMPORTANT: allow sound AFTER user interaction
+      video.muted = false;
+
+      // Play inline
+      video.play();
+    }
+
+  /* Auto-pause videos when scrolling */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        const video = entry.target;
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  document.querySelectorAll(".auto-pause-video").forEach(video => {
+    observer.observe(video);
+  });
+
+  /* ================= GALLERY MODAL ================= */
+  function openGallery() {
+    document.getElementById("galleryModal").classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeGallery() {
+    document.getElementById("galleryModal").classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  /* Close gallery on background click */
+  document.getElementById("galleryModal")?.addEventListener("click", e => {
+    if (e.target.id === "galleryModal") closeGallery();
+  });
+
+  /* ================= IMAGE ZOOM ================= */
+  function toggleZoom(img) {
+    const zoomed = img.classList.toggle("scale-150");
+    img.style.cursor = zoomed ? "zoom-out" : "zoom-in";
+  }
+  </script>
 </body>
 </html>
