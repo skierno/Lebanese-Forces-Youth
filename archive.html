@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="site.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon_io/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive – Lebanese Forces Youth USA</title>
+  <meta name="description" content="Announcements, events, and milestones of Lebanese Forces Youth USA">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+
+<!-- NAV -->
+<div id="nav-placeholder"></div>
+
+<<!-- ================= HERO ================= -->
+  <section class="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+
+      <!-- Small logo (same scale as other pages) -->
+        <div class="flex justify-center mb-6">
+            <img
+              src="resources/logoLF-modified.png"
+              alt="Lebanese Forces Youth USA Logo"
+              class="w-32 h-32 object-contain"
+            >
+          </div>
+
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        Archive/Events
+      </h1>
+
+      <p class="text-lg md:text-xl max-w-3xl mb-6 mx-auto leading-relaxed">
+        See list of past and upcoming events, announcements, and milestones of Lebanese Forces Youth USA.
+      </p> 
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="index.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-red-600 transition-colors" data-i18n="btn_back_home">
+                Back to Home
+            </a>
+            <a href="youth.html" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors" data-i18n="btn_youth">
+                See Who We Are.
+            </a>
+
+    </div>
+  </section>
+
+<main class="py-16">
+<div class="max-w-7xl mx-auto px-4 space-y-20">
+
+<!-- ================= ANNOUNCEMENTS ================= -->
+<section>
+  <h2 class="text-3xl font-bold text-red-600 mb-6 text-center">Announcements</h2>
+  <div id="announcementList" class="space-y-6"></div>
+</section>
+
+<!-- ================= EVENTS ================= -->
+<section>
+  <h2 class="text-3xl font-bold text-red-600 mb-4 text-center">Events</h2>
+
+  <button id="btnUpcoming">Upcoming</button>
+  <button id="btnPast">Past</button>
+
+  <div id="eventList" class="space-y-6"></div>
+
+  <!-- CALENDAR -->
+  <div class="mt-12">
+    <div class="flex justify-between items-center mb-4">
+      <button id="prevMonth" class="px-3 py-1 border rounded">←</button>
+      <h3 id="calendarTitle" class="font-semibold text-lg"></h3>
+      <button id="nextMonth" class="px-3 py-1 border rounded">→</button>
+    </div>
+
+    <div class="grid grid-cols-7 gap-1 text-center text-sm font-semibold mb-2">
+      <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+    </div>
+
+    <div id="calendarGrid" class="grid grid-cols-7 gap-1"></div>
+  </div>
+</section>
+
+<!-- ================= MILESTONES ================= -->
+<section>
+  <h2 class="text-3xl font-bold text-red-600 mb-6 text-center">Milestones</h2>
+  <div id="milestoneList" class="space-y-6"></div>
+</section>
+
+</div>
+</main>
+<!-- Footer -->
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+              <div class="flex flex-col items-center justify-center mb-6">
+                  <img
+                      src="resources/logo.png"
+                      alt="Lebanese Forces Youth USA Logo"
+                      class="w-16 h-16 object-contain mb-3"
+                    >
+              <h3 class="text-lg font-semibold">Lebanese Forces Youth USA - Official Website of the Lebanese Forces Youth USA</h3>
+          </div>
+          <p class="text-gray-300 mb-4 text-sm">
+            Official Website of the Lebanese Forces Youth USA for understanding Lebanese politics and the role of the Lebanese Forces Youth movement 
+          </p>
+          <div class="flex justify-center space-x-4 mb-4">
+              <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
+                  Follow on Instagram
+              </a>
+          </div>
+          <p class="text-xs text-gray-400">
+              © 2025 Lebanese Forces Youth USA. Created by Joseph Sleiman.
+          </p>
+      </div>
+  </footer>
+
+<!-- ================= DAY MODAL ================= -->
+<div id="dayModal" class="hidden fixed inset-0 z-50">
+  <div id="dayBackdrop" class="absolute inset-0 bg-black/60"></div>
+
+  <div class="relative max-w-2xl mx-auto mt-16 px-4">
+    <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+      <div class="flex justify-between items-center px-6 py-4 border-b">
+        <div>
+          <h3 id="dayModalTitle" class="text-xl font-bold">Events</h3>
+          <p id="dayModalSubtitle" class="text-sm text-gray-500"></p>
+        </div>
+        <button id="dayCloseBtn" class="text-xl">✕</button>
+      </div>
+
+      <div class="px-6 py-6">
+        <div id="dayEventList" class="space-y-4"></div>
+        <div id="dayNoEvents" class="hidden text-gray-600 text-sm">No events scheduled.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= DATA ================= -->
+<script>
+const ANNOUNCEMENTS = [
+  { date: "2025-01-01", title: "LF Youth USA Established", text: "Lebanese Forces Youth USA officially launched." }
+];
+
+const EVENTS = [
+  {
+    date: "2025-02-15",
+    title: "Youth Meeting",
+    time: "6:00 PM",
+    location: "Online",
+    description: "Educational session for members."
+  },
+  {
+    date: "2026-02-15",
+    title: "Youth Meeting",
+    time: "6:00 PM",
+    location: "Online",
+    description: "Educational session for members."
+  },
+  {
+    date: "2026-03-15",
+    title: "Youth Meeting",
+    time: "6:00 PM",
+    location: "Online",
+    description: "Educational session for members."
+  }
+];
+  
+const MILESTONES = [
+  { date: "2025", title: "Organization Founded", text: "LF Youth USA established." }
+];
+</script>
+
+<!-- ================= LOGIC ================= -->
+<script>
+let showUpcoming = true;
+let currentMonth = new Date();
+
+function renderAnnouncements() {
+  const el = document.getElementById("announcementList");
+  el.innerHTML = ANNOUNCEMENTS.map(a => `
+    <div class="bg-white p-6 rounded-xl shadow">
+      <div class="text-sm text-gray-500">${a.date}</div>
+      <h3 class="font-semibold text-lg mt-1">${a.title}</h3>
+      <p class="text-gray-700 mt-2">${a.text}</p>
+    </div>
+  `).join("");
+}
+
+function renderEvents() {
+  const el = document.getElementById("eventList");
+  const today = new Date().toISOString().split("T")[0];
+  const filtered = EVENTS.filter(e => showUpcoming ? e.date >= today : e.date < today);
+  el.innerHTML = filtered.map(e => `
+    <div class="bg-white p-6 rounded-xl shadow">
+      <div class="text-sm text-gray-500">${e.date} ${e.time || ""}</div>
+      <h3 class="font-semibold text-lg">${e.title}</h3>
+      <p class="text-gray-600">${e.location || ""}</p>
+      <p class="text-gray-700 mt-2">${e.description || ""}</p>
+    </div>
+  `).join("");
+}
+
+function renderMilestones() {
+  document.getElementById("milestoneList").innerHTML = MILESTONES.map(m => `
+    <div class="bg-white p-6 rounded-xl shadow">
+      <div class="text-sm text-gray-500">${m.date}</div>
+      <h3 class="font-semibold text-lg">${m.title}</h3>
+      <p class="text-gray-700 mt-2">${m.text}</p>
+    </div>
+  `).join("");
+}
+
+function renderCalendar() {
+  const grid = document.getElementById("calendarGrid");
+  grid.innerHTML = "";
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
+
+  document.getElementById("calendarTitle").textContent =
+    currentMonth.toLocaleString("default", { month: "long", year: "numeric" });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) grid.innerHTML += `<div></div>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${year}-${String(month+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const hasEvent = EVENTS.some(e => e.date === dateStr);
+
+    grid.innerHTML += `
+      <div class="border h-20 p-1 cursor-pointer text-sm" onclick="openDay('${dateStr}')">
+        <div>${d}</div>
+        ${hasEvent ? `<div class="w-2 h-2 bg-red-600 rounded-full mx-auto mt-1"></div>` : ""}
+      </div>
+    `;
+  }
+}
+
+function openDay(dateStr) {
+  const modal = document.getElementById("dayModal");
+  const list = document.getElementById("dayEventList");
+  const empty = document.getElementById("dayNoEvents");
+
+  document.getElementById("dayModalSubtitle").textContent = dateStr;
+  const dayEvents = EVENTS.filter(e => e.date === dateStr);
+
+  if (dayEvents.length === 0) {
+    list.innerHTML = "";
+    empty.classList.remove("hidden");
+  } else {
+    empty.classList.add("hidden");
+    list.innerHTML = dayEvents.map(e => `
+      <div class="border rounded p-4">
+        <div class="font-semibold">${e.title}</div>
+        <div class="text-sm text-gray-600">${e.time || ""} ${e.location || ""}</div>
+        <p class="mt-2 text-gray-700">${e.description || ""}</p>
+      </div>
+    `).join("");
+  }
+
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeDay() {
+  document.getElementById("dayModal").classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("dayCloseBtn").onclick = closeDay;
+document.getElementById("dayBackdrop").onclick = closeDay;
+
+document.getElementById("prevMonth").onclick = () => {
+  currentMonth.setMonth(currentMonth.getMonth() - 1);
+  renderCalendar();
+};
+document.getElementById("nextMonth").onclick = () => {
+  currentMonth.setMonth(currentMonth.getMonth() + 1);
+  renderCalendar();
+};
+
+renderAnnouncements();
+renderEvents();
+renderMilestones();
+renderCalendar();
+</script>
+
+<!-- NAV LOAD -->
+<script>
+fetch("nav.html").then(r=>r.text()).then(html=>{
+  document.getElementById("nav-placeholder").innerHTML = html;
+  const s=document.createElement("script");
+  s.src="nav.js"; document.body.appendChild(s);
+});
+</script>
+  <!-- Config Loader Script -->
+  <script src="config-loader.js"></script>
+
+  <!-- JavaScript -->
+  <script>
+    fetch("nav.html")
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById("nav-placeholder").innerHTML = html;
+
+        // Load nav behavior
+        const navScript = document.createElement("script");
+        navScript.src = "nav.js";
+        document.body.appendChild(navScript);
+
+        // Google Translate init
+        window.googleTranslateElementInit = function () {
+          new google.translate.TranslateElement(
+            { pageLanguage: "en", includedLanguages: "en,ar", autoDisplay: false },
+            "google_translate_element"
+          );
+        };
+
+        const gt = document.createElement("script");
+        gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(gt);
+
+        // Wire YOUR button
+        const langToggle = document.getElementById("langToggle");
+        const currentLang = document.getElementById("currentLang");
+
+        function setLanguage(lang) {
+          const select = document.querySelector("select.goog-te-combo");
+          if (!select) return false;
+
+          select.value = lang;
+          select.dispatchEvent(new Event("change"));
+
+          localStorage.setItem("siteLang", lang);
+          if (currentLang) {
+            currentLang.textContent = (lang === "ar") ? "العربية" : "English";
+          }
+          return true;
+        }
+
+        function waitForGoogleSelectAndBind() {
+          let tries = 0;
+          const timer = setInterval(() => {
+            tries++;
+            const select = document.querySelector("select.goog-te-combo");
+
+            if (select) {
+              clearInterval(timer);
+
+              // Restore saved language
+              const saved = localStorage.getItem("siteLang");
+              if (saved) setLanguage(saved);
+
+              if (langToggle) {
+                langToggle.addEventListener("click", () => {
+                  const next =
+                    (localStorage.getItem("siteLang") === "ar") ? "en" : "ar";
+                  setLanguage(next);
+                });
+              }
+            }
+
+            if (tries > 60) clearInterval(timer);
+          }, 100);
+        }
+
+        waitForGoogleSelectAndBind();
+
+        // ✅ Detect Google Translate bar AFTER everything exists
+        (function detectGoogleBar() {
+          const check = setInterval(() => {
+            const bar = document.querySelector(".goog-te-banner-frame");
+            if (bar) {
+              document.body.classList.add("has-google-bar");
+              clearInterval(check);
+            }
+          }, 100);
+        })();
+      });
+  </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const upAll = document.querySelectorAll("#btnUpcoming");
+    const pastAll = document.querySelectorAll("#btnPast");
+
+    // If duplicates exist, this will still bind the first pair
+    const btnUpcoming = upAll[0];
+    const btnPast = pastAll[0];
+
+    console.log("btnUpcoming count:", upAll.length, "btnPast count:", pastAll.length);
+
+    if (!btnUpcoming || !btnPast) return;
+
+    function forceActive(btn, active) {
+      if (active) {
+        btn.style.setProperty("background-color", "#dc2626", "important"); // red-600
+        btn.style.setProperty("color", "#ffffff", "important");
+        btn.style.setProperty("border", "1px solid #dc2626", "important");
+      } else {
+        btn.style.setProperty("background-color", "transparent", "important");
+        btn.style.setProperty("color", "#dc2626", "important");
+        btn.style.setProperty("border", "1px solid #dc2626", "important");
+      }
+      btn.style.setProperty("border-radius", "0.5rem", "important");
+      btn.style.setProperty("padding", "0.5rem 1.25rem", "important");
+      btn.style.setProperty("font-weight", "600", "important");
+    }
+
+    function setActive(which) {
+      forceActive(btnUpcoming, which === "upcoming");
+      forceActive(btnPast, which === "past");
+    }
+
+    btnUpcoming.addEventListener("click", () => {
+      showUpcoming = true;
+      renderEvents();
+      setActive("upcoming");
+    });
+
+    btnPast.addEventListener("click", () => {
+      showUpcoming = false;
+      renderEvents();
+      setActive("past");
+    });
+
+    setActive("upcoming");
+  });
+  </script>
+
+</body>
+</html>
