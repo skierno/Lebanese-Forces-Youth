@@ -279,7 +279,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <button type="button" class="chapter-card bg-white rounded-xl shadow p-6 text-left card-hover border border-gray-100" data-key="midwest">
                         <h3 class="text-xl font-semibold text-red-600 mb-1">Midwest</h3>
-                        <p class="text-gray-600 text-sm">Example: IL, MI, OH, IN, WI</p>
+                        <p class="text-gray-600 text-sm">Example: IL, MI, OH</p>
                         <p class="text-xs text-gray-500 mt-3">Status: Forming</p>
                     </button>
 
@@ -306,6 +306,13 @@
                         <p class="text-gray-600 text-sm">NC, VA, DE</p>
                         <p class="text-xs text-gray-500 mt-3">Status: Forming with leader</p>
                     </button>
+
+                    <button type="button" class="chapter-card bg-white rounded-xl shadow p-6 text-left card-hover border border-gray-100" data-key="west">
+                            <h3 class="text-xl font-semibold text-red-600 mb-1">West</h3>
+                            <p class="text-gray-600 text-sm">CA, NV, AZ</p>
+                            <p class="text-xs text-gray-500 mt-3">Status: Forming</p>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="mt-10 text-center">
@@ -384,8 +391,8 @@
         const CHAPTER_DATA = {
             midwest: {
                 title: "Midwest Chapter",
-                subtitle: "Status: Forming",
-                coordinator: "TBD",
+                subtitle: "Status: Forming with leader",
+                coordinator: "Jonathan Harb",
                 secretary: "TBD",
                 comms: "TBD",
                 volunteer: "TBD",
@@ -426,6 +433,15 @@
                 comms: "TBD",
                 volunteer: "TBD",
                 about: "Regional chapter covering Delaware, North Carolina, and Virginia. Placeholder leadership and details will be updated once positions are finalized."
+            },
+            west: {
+                title: "West",
+                subtitle: "Status: Forming",
+                coordinator: "TBD",
+                secretary: "TBD",
+                comms: "TBD",
+                volunteer: "TBD",
+                about: "Regional chapter covering California, Nevada, and Arizona. Placeholder leadership and details will be updated once positions are finalized."
             }
         };
 
