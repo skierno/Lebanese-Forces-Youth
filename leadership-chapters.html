@@ -315,11 +315,11 @@
 <!-- ═══════════════════════════════════════════════════════════
      CHAPTER MODAL
      ═══════════════════════════════════════════════════════════ -->
-<div id="chapterModal" class="hidden fixed inset-0 z-50">
-  <div id="chapterBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+<div id="chapterModal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+  <div id="chapterBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-  <div class="relative max-w-2xl mx-auto mt-10 sm:mt-16 px-4">
-    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+  <div class="relative min-h-full flex items-center justify-center p-4 py-8">
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-2xl">
 
       <!-- Header -->
       <div class="flex items-center justify-between px-6 py-5 border-b bg-gray-50">
