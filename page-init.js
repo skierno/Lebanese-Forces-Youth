@@ -18,7 +18,7 @@
   const BANNER_KEY     = "announcement-v1";           // bump to "v2" to re-show after editing
   const BANNER_HEIGHT  = 40;                          // px — keep this slim
   const BANNER_HTML    = `
-    📅 <strong>27th Annual Convention</strong> &nbsp;·&nbsp; Dallas, TX &nbsp;·&nbsp; Nov 5–8, 2026 &nbsp;
+    📅 <strong>Lebanese Forces 27th Annual Convention</strong> &nbsp;·&nbsp; Dallas, TX &nbsp;·&nbsp; Nov 5–8, 2026 &nbsp;
     <a href="https://lfna.info" target="_blank" rel="noopener"
        style="color:#ffd700;font-weight:600;text-decoration:underline;text-underline-offset:2px;">
       Register at Lfna.info →
