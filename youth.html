@@ -182,145 +182,136 @@
 </section>
 
 <!-- ================= PHOTO GALLERY ================= -->
-    <section class="bg-gray-100 py-16">
-      <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl text-red-600 font-bold text-center mb-10">
-          Events & Activities
-        </h2>
+<!-- ✏️ EDIT: Add photos to the grid below. Copy a photo block and change the src, alt, and caption. -->
+<section class="bg-gray-100 py-16">
+  <div class="max-w-7xl mx-auto px-4">
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
-
-          <!-- Photo 1 -->
-          <div class="text-center">
-            <img
-              loading="lazy"
-              src="resources/youth/photos/photo1.jpg"
-              onclick="openGallery()"
-              class="cursor-pointer rounded-lg shadow object-cover h-64 w-full"
-              alt="Youth Meeting at Convention"
-            >
-            <p class="mt-3 text-sm text-red-600">
-              Youth meeting at convention
-            </p>
-          </div>
-
-          <!-- Photo 2 -->
-          <div class="text-center">
-            <img
-              loading="lazy"
-              src="resources/youth/photos/photo3.jpg"
-              onclick="openGallery()"
-              class="cursor-pointer rounded-lg shadow object-cover h-64 w-full"
-              alt="Zoom meeting with Samir Geagea"
-            >
-            <p class="mt-3 text-sm text-red-600">
-              Zoom meeting with Samir Geagea
-            </p>
-          </div>
-
-          <!-- Photo 3 -->
-          <div class="text-center">
-            <img
-              loading="lazy"
-              src="resources/youth/photos/photo2.jpg"
-              onclick="openGallery()"
-              class="cursor-pointer rounded-lg shadow object-cover h-64 w-full"
-              alt="Youth picture at convention"
-            >
-            <p class="mt-3 text-sm text-red-600">
-              Youth at convention
-            </p>
-          </div>
-
-        </div>
-
-        <div class="text-center">
-          <button
-            onclick="openGallery()"
-            class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700"
-          >
-            View Full Gallery
-          </button>
-        </div>
-      </div>
-    </section>
-
-
-<section>
-    <!-- ================= FULL GALLERY MODAL ================= -->
-    <div
-      id="galleryModal"
-      class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 overflow-y-auto"
-    >
-
-      <!-- Close Button -->
-      <button
-        onclick="closeGallery()"
-        class="fixed top-4 right-4 text-white text-4xl
-               z-[100000] pointer-events-auto"
-        aria-label="Close gallery"
-      >
-        &times;
-      </button>
-
-      <!-- Gallery Content -->
-      <div class="max-w-5xl mx-auto px-6 py-16 space-y-20">
-
-        <!-- Image 1 -->
-        <div class="text-center">
-          <img
-            src="resources/youth/photos/photo1.jpg"
-            alt="Youth Meeting at Convention"
-            loading="lazy"
-            onclick="toggleZoom(this)"
-            class="mx-auto rounded-lg object-contain
-                   max-h-[80vh] w-auto
-                   cursor-zoom-in transition-transform duration-300"
-          >
-          <p class="mt-4 text-sm text-gray-300">
-              Youth Meeting at Convention
-          </p>
-        </div>
-
-        <!-- Image 2 -->
-        <div class="text-center">
-          <img
-            src="resources/youth/photos/photo3.jpg"
-            alt="Youth at Zoom Meeting with Samir Geagea at Convention"
-            loading="lazy"
-            onclick="toggleZoom(this)"
-            class="mx-auto rounded-lg object-contain
-                   max-h-[80vh] w-auto
-                   cursor-zoom-in transition-transform duration-300"
-          >
-          <p class="mt-4 text-sm text-gray-300">
-              Youth at Zoom Meeting with Samir Geagea at Convention
-          </p>
-        </div>
-
-        <!-- Image 3 -->
-        <div class="text-center">
-          <img
-            src="resources/youth/photos/photo2.jpg"
-            alt="Youth Picture at Convention"
-            loading="lazy"
-            onclick="toggleZoom(this)"
-            class="mx-auto rounded-lg object-contain
-                   max-h-[80vh] w-auto
-                   cursor-zoom-in transition-transform duration-300"
-          >
-          <p class="mt-4 text-sm text-gray-300">
-              Youth Picture at Convention
-          </p>
-        </div>
-
-        <!-- Image 4 -->
-        
-
-        <!-- Add more images in order -->
-      </div>
+    <div class="text-center mb-10">
+      <h2 class="section-heading">Events &amp; Activities</h2>
+      <p class="section-subheading">Moments from our meetings, events, and community activities</p>
     </div>
-    </section>
+
+    <!-- ✏️ Photo grid — add more items by copying a <div class="gallery-thumb"> block -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-10">
+
+      <!-- Photo 1 -->
+      <div class="gallery-thumb group relative rounded-xl overflow-hidden shadow-md aspect-square cursor-pointer"
+           onclick="openGallery(0)">
+        <img loading="lazy" src="resources/youth/photos/photo1.jpg"
+             alt="Youth Meeting at Convention"
+             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <p class="text-white text-sm font-medium">Youth Meeting at Convention</p>
+        </div>
+      </div>
+
+      <!-- Photo 2 -->
+      <div class="gallery-thumb group relative rounded-xl overflow-hidden shadow-md aspect-square cursor-pointer"
+           onclick="openGallery(1)">
+        <img loading="lazy" src="resources/youth/photos/photo3.jpg"
+             alt="Zoom meeting with Samir Geagea"
+             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <p class="text-white text-sm font-medium">Zoom meeting with Samir Geagea</p>
+        </div>
+      </div>
+
+      <!-- Photo 3 -->
+      <div class="gallery-thumb group relative rounded-xl overflow-hidden shadow-md aspect-square cursor-pointer"
+           onclick="openGallery(2)">
+        <img loading="lazy" src="resources/youth/photos/photo2.jpg"
+             alt="Youth picture at convention"
+             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <p class="text-white text-sm font-medium">Youth at Convention</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center">
+      <button onclick="openGallery(0)" class="btn-primary">
+        View Full Gallery
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= FULL GALLERY MODAL ================= -->
+<div id="galleryModal" class="fixed inset-0 bg-black/95 hidden z-50 overflow-y-auto">
+
+  <!-- Close + counter bar -->
+  <div class="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-black/60 backdrop-blur-sm">
+    <p id="galleryCounter" class="text-gray-300 text-sm font-medium"></p>
+    <button onclick="closeGallery()"
+            class="text-gray-300 hover:text-white text-3xl leading-none px-2"
+            aria-label="Close gallery">
+      &times;
+    </button>
+  </div>
+
+  <!-- ✏️ ADD PHOTOS HERE — copy a <div class="gallery-item"> block and update src, alt, caption -->
+  <!-- The index on onclick="openGallery(N)" must match the position in the grid above -->
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4" id="galleryGrid">
+
+      <!-- Gallery Image 1 -->
+      <div class="gallery-item break-inside-avoid rounded-xl overflow-hidden shadow-lg cursor-pointer
+                  hover:opacity-90 transition-opacity"
+           onclick="openLightbox(0)">
+        <img src="resources/youth/photos/photo1.jpg"
+             alt="Youth Meeting at Convention"
+             loading="lazy"
+             class="w-full">
+        <div class="bg-gray-900 px-4 py-3">
+          <p class="text-gray-200 text-sm">Youth Meeting at Convention</p>
+        </div>
+      </div>
+
+      <!-- Gallery Image 2 -->
+      <div class="gallery-item break-inside-avoid rounded-xl overflow-hidden shadow-lg cursor-pointer
+                  hover:opacity-90 transition-opacity"
+           onclick="openLightbox(1)">
+        <img src="resources/youth/photos/photo3.jpg"
+             alt="Zoom meeting with Samir Geagea"
+             loading="lazy"
+             class="w-full">
+        <div class="bg-gray-900 px-4 py-3">
+          <p class="text-gray-200 text-sm">Zoom meeting with Samir Geagea</p>
+        </div>
+      </div>
+
+      <!-- Gallery Image 3 -->
+      <div class="gallery-item break-inside-avoid rounded-xl overflow-hidden shadow-lg cursor-pointer
+                  hover:opacity-90 transition-opacity"
+           onclick="openLightbox(2)">
+        <img src="resources/youth/photos/photo2.jpg"
+             alt="Youth Picture at Convention"
+             loading="lazy"
+             class="w-full">
+        <div class="bg-gray-900 px-4 py-3">
+          <p class="text-gray-200 text-sm">Youth Picture at Convention</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── LIGHTBOX (single image view inside gallery) ── -->
+<div id="lightbox" class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-black/95">
+  <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl z-10">&times;</button>
+  <button onclick="lightboxPrev()" class="absolute left-4 text-white text-4xl z-10 px-2 hover:text-gray-300">&#8249;</button>
+  <button onclick="lightboxNext()" class="absolute right-16 text-white text-4xl z-10 px-2 hover:text-gray-300">&#8250;</button>
+  <div class="max-w-5xl max-h-screen px-12 py-8 text-center">
+    <img id="lightboxImg" src="" alt="" class="max-h-[80vh] max-w-full mx-auto rounded-lg object-contain">
+    <p id="lightboxCaption" class="text-gray-300 text-sm mt-4"></p>
+  </div>
+</div>
 
 <!-- ================= VIDEOS (THUMBNAIL → PLAY) ================= -->
     <section class="py-16">
@@ -504,72 +495,82 @@
     // One initial check after load
     setTimeout(pauseOutOfView, 500);
 
-  /* ================= GALLERY MODAL ================= */
-  function openGallery() {
+  /* ═══════════════════════════════════════════════════════════
+     GALLERY — photos list (must match the grid + modal above)
+     ✏️ Add new photos here when you add them to the HTML above
+     ═══════════════════════════════════════════════════════════ */
+  const GALLERY_PHOTOS = [
+    { src: "resources/youth/photos/photo1.jpg", caption: "Youth Meeting at Convention" },
+    { src: "resources/youth/photos/photo3.jpg", caption: "Zoom meeting with Samir Geagea" },
+    { src: "resources/youth/photos/photo2.jpg", caption: "Youth at Convention" }
+  ];
+
+  let currentLightboxIndex = 0;
+
+  /* Open the full gallery modal */
+  window.openGallery = function(startIndex = 0) {
+    currentLightboxIndex = startIndex;
     document.getElementById("galleryModal").classList.remove("hidden");
     document.body.style.overflow = "hidden";
-  }
+    const counter = document.getElementById("galleryCounter");
+    if (counter) counter.textContent = GALLERY_PHOTOS.length + " Photos";
+  };
 
-  function closeGallery() {
+  window.closeGallery = function() {
     document.getElementById("galleryModal").classList.add("hidden");
     document.body.style.overflow = "";
-  }
+    closeLightbox();
+  };
 
-  /* Close gallery on background click */
-  document.getElementById("galleryModal")?.addEventListener("click", e => {
-    if (e.target.id === "galleryModal") closeGallery();
+  /* Open lightbox (single image view) from within the gallery */
+  window.openLightbox = function(index) {
+    currentLightboxIndex = index;
+    const photo = GALLERY_PHOTOS[index];
+    if (!photo) return;
+    document.getElementById("lightboxImg").src       = photo.src;
+    document.getElementById("lightboxImg").alt       = photo.caption;
+    document.getElementById("lightboxCaption").textContent = photo.caption;
+    document.getElementById("lightbox").classList.remove("hidden");
+  };
+
+  window.closeLightbox = function() {
+    document.getElementById("lightbox").classList.add("hidden");
+  };
+
+  window.lightboxPrev = function() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
+    openLightbox(currentLightboxIndex);
+  };
+
+  window.lightboxNext = function() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % GALLERY_PHOTOS.length;
+    openLightbox(currentLightboxIndex);
+  };
+
+  /* Keyboard navigation */
+  document.addEventListener("keydown", (e) => {
+    const galleryOpen  = !document.getElementById("galleryModal").classList.contains("hidden");
+    const lightboxOpen = !document.getElementById("lightbox").classList.contains("hidden");
+    if (e.key === "Escape") {
+      if (lightboxOpen) { closeLightbox(); return; }
+      if (galleryOpen)  { closeGallery();  return; }
+    }
+    if (lightboxOpen) {
+      if (e.key === "ArrowLeft")  lightboxPrev();
+      if (e.key === "ArrowRight") lightboxNext();
+    }
   });
 
-  /* ================= IMAGE ZOOM ================= */
-  function toggleZoom(img) {
-    const zoomed = img.classList.toggle("scale-150");
-    img.style.cursor = zoomed ? "zoom-out" : "zoom-in";
-  }
-  </script>
-  <script>
-  /* ================= GALLERY EXIT CONTROLS (FIXED) ================= */
-
+  /* Swipe-down to close gallery on mobile */
   const galleryModal = document.getElementById("galleryModal");
-
   let touchStartY = null;
-  let touchStartScroll = null;
 
   galleryModal?.addEventListener("touchstart", (e) => {
-    // Only allow swipe-close if user is at the top
-    touchStartScroll = galleryModal.scrollTop;
-
-    if (touchStartScroll === 0) {
-      touchStartY = e.touches[0].clientY;
-    } else {
-      touchStartY = null;
-    }
+    touchStartY = galleryModal.scrollTop === 0 ? e.touches[0].clientY : null;
   });
-
   galleryModal?.addEventListener("touchmove", (e) => {
     if (touchStartY === null) return;
-
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - touchStartY;
-
-    // Must be a deliberate swipe DOWN from the top
-    if (diff > 120) {
-      closeGallery();
-      touchStartY = null;
-    }
-  });
-
-  /* Tap outside image closes gallery */
-  galleryModal?.addEventListener("click", (e) => {
-    if (e.target === galleryModal) {
-      closeGallery();
-    }
-  });
-
-  /* ESC closes gallery */
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !galleryModal.classList.contains("hidden")) {
-      closeGallery();
-    }
+    if (e.touches[0].clientY - touchStartY > 120) { closeGallery(); touchStartY = null; }
   });
   </script>
 </body>

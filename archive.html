@@ -14,20 +14,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Archive – Lebanese Forces USA Young Professionals</title>
   <meta name="description" content="Announcements, events, and milestones of Lebanese Forces USA Young Professionals">
-  <!-- Open Graph (WhatsApp, Facebook, iMessage, Discord) -->
-  <meta property="og:title" content="Lebanese Forces USA Young Professionals - Archive">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Lebanese Forces USA Young Professionals - Archive">
   <meta property="og:description" content="Announcements, events, and milestones of Lebanese Forces USA Young Professionals">
-  <meta property="og:image" content="https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png">
-  <meta property="og:url" content="https://lebaneseforcesyouthusa.com/">
-  <meta property="og:type" content="website">
+  <meta property="og:image"       content="https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png">
+  <meta property="og:url"         content="https://lebaneseforcesyouthusa.com/">
+  <meta property="og:type"        content="website">
 
-  <!-- Twitter / X (also used by many apps) -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lebanese Forces USA Young Professionals – Archive">
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Lebanese Forces USA Young Professionals – Archive">
   <meta name="twitter:description" content="Announcements, events, and milestones of Lebanese Forces USA Young Professionals">
-  <meta name="twitter:image" content="https://lebaneseforcesyouthusa.com/resources/Graph.jpeg">
+  <meta name="twitter:image"       content="https://lebaneseforcesyouthusa.com/resources/Graph.jpeg">
 
-  <!-- Organization logo for Google -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,162 +38,151 @@
     "logo": "https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png"
   }
   </script>
+
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cedar-red': '#DC143C',
+            'cedar-green': '#228B22',
+            'phoenix-gold': '#FFD700',
+            'mediterranean-blue': '#1a2332'
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
 <body class="bg-gray-50">
 
-<!-- NAV -->
+<!-- NAV (shared) -->
 <div id="nav-placeholder"></div>
 
-<<!-- ================= HERO ================= -->
-  <section class="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
-    <div class="max-w-7xl mx-auto px-4 text-center">
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════════ -->
+<section class="bg-gradient-to-r from-red-600 to-red-800 text-white py-20">
+  <div class="max-w-7xl mx-auto px-4 text-center">
 
-      <!-- Small logo (same scale as other pages) -->
-        <div class="flex justify-center mb-6">
-            <img
-              src="resources/logoLF-modified.png"
-              alt="Lebanese Forces Youth USA Logo"
-              class="w-32 h-32 object-contain"
-            >
-          </div>
-
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">
-        Archive/Events
-      </h1>
-
-      <p class="text-lg md:text-xl max-w-3xl mb-6 mx-auto leading-relaxed">
-        See list of past and upcoming events, announcements, and milestones of Lebanese Forces USA Young Professionals.
-      </p> 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="index.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-red-600 transition-colors" data-i18n="btn_back_home">
-                Back to Home
-            </a>
-            <a href="youth.html" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors" data-i18n="btn_youth">
-                See Who We Are.
-            </a>
-
+    <div class="flex justify-center mb-6">
+      <img src="resources/logoLF-modified.png"
+           alt="Lebanese Forces Youth USA Logo"
+           class="w-32 h-32 object-contain">
     </div>
-  </section>
 
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Archive &amp; Events</h1>
+    <p class="text-lg md:text-xl max-w-3xl mb-6 mx-auto leading-relaxed">
+      Past and upcoming events, announcements, and milestones of Lebanese Forces USA Young Professionals.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="index.html" class="btn-outline">Back to Home</a>
+      <a href="youth.html" class="btn-primary">See Who We Are</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════════ -->
 <main class="py-16">
-<div class="max-w-7xl mx-auto px-4 space-y-20">
+  <div class="max-w-7xl mx-auto px-4 space-y-20">
 
-<!-- ================= ANNOUNCEMENTS ================= -->
-<section>
-  <h2 class="text-3xl font-bold text-red-600 mb-6 text-center">Announcements</h2>
-  <div id="announcementList" class="space-y-6"></div>
-</section>
-
-<!-- ================= EVENTS ================= -->
-<section>
-  <h2 class="text-3xl font-bold text-red-600 mb-4 text-center">Events</h2>
-
-  <button id="btnUpcoming">Upcoming</button>
-  <button id="btnPast">Past</button>
-
-  <div id="eventList" class="space-y-6"></div>
-
-  <!-- ================= GOOGLE CALENDAR ================= -->
-  <div class="mt-12">
-    <h3 class="font-semibold text-red-600 text-2xl mb-4 text-center">Calendar</h3>
-
-    <div class="rounded-xl overflow-hidden shadow border bg-white">
-
-      <!-- Desktop / Tablet -->
-      <iframe
-        src="https://calendar.google.com/calendar/embed?src=f624c2b1f1e05f03ad9aaac85df26153fefe166ffb5e3ad81d32ea57c156e9d8%40group.calendar.google.com&ctz=America%2FChicago"
-        class="hidden md:block w-full h-[820px] border-0"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-
-      <!-- Mobile (Agenda view for readability) -->
-      <iframe
-        src="https://calendar.google.com/calendar/embed?src=f624c2b1f1e05f03ad9aaac85df26153fefe166ffb5e3ad81d32ea57c156e9d8%40group.calendar.google.com&ctz=America%2FChicago&mode=AGENDA"
-        class="block md:hidden w-full h-[720px] border-0"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-
-    </div>
-
-    <div class="text-center mt-3">
-      <a
-        href="https://calendar.google.com/calendar/u/0?cid=ZjYyNGMyYjFmMWUwNWYwM2FkOWFhYWM4NWRmMjYxNTNmZWZlMTY2ZmZiNWUzYWQ4MWQzMmVhNTdjMTU2ZTlkOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
-        target="_blank"
-        rel="noopener"
-        class="text-red-600 hover:underline text-sm font-medium"
-      >
-        Open full calendar →
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= MILESTONES ================= -->
-<section>
-  <h2 class="text-3xl font-bold text-red-600 mb-6 text-center">Milestones</h2>
-  <div id="milestoneList" class="space-y-6"></div>
-</section>
-
-</div>
-</main>
-<!-- Footer -->
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-12">
-      <div class="max-w-7xl mx-auto px-4 text-center">
-              <div class="flex flex-col items-center justify-center mb-6">
-                  <img
-                      src="resources/logoLF-modified.png"
-                      alt="Lebanese Forces Youth USA Logo"
-                      class="w-16 h-16 object-contain mb-3"
-                    >
-              <h3 class="text-lg font-semibold">Lebanese Forces USA Young Professionals - Official Website of the Lebanese Forces USA Young Professionals</h3>
-          </div>
-          <p class="text-gray-300 mb-4 text-sm">
-            Official Website of the Lebanese Forces USA Young Professionals for understanding Lebanese politics and the role of the Lebanese Forces USA Young Professionals movement 
-          </p>
-        <div class="flex justify-center space-x-4 mb-4">
-          <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-red-400 to-red-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
-              Follow on Instagram
-          </a>
-          <a href="https://www.facebook.com/lebanese.forces.usa.youth.offiical.page/" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-red-800 to-red-400 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
-                Follow on Facebook
-            </a>
-          </div>
-          <p class="text-xs text-gray-400">
-              © 2026 Lebanese Forces USA Young Professionals. Created by Joseph Sleiman.
-          </p>
+    <!-- ── ANNOUNCEMENTS ─────────────────────────────────────── -->
+    <section>
+      <div class="text-center mb-8">
+        <h2 class="section-heading">Announcements</h2>
+        <p class="section-subheading">Latest updates from LF USA Young Professionals</p>
       </div>
-  </footer>
+      <div id="announcementList" class="space-y-6"></div>
+    </section>
 
-<!-- ================= DAY MODAL ================= -->
-<div id="dayModal" class="hidden fixed inset-0 z-50">
-  <div id="dayBackdrop" class="absolute inset-0 bg-black/60"></div>
+    <hr class="section-divider">
 
-  <div class="relative max-w-2xl mx-auto mt-16 px-4">
-    <div class="bg-white rounded-xl shadow-xl overflow-hidden">
-      <div class="flex justify-between items-center px-6 py-4 border-b">
-        <div>
-          <h3 id="dayModalTitle" class="text-xl font-bold">Events</h3>
-          <p id="dayModalSubtitle" class="text-sm text-gray-500"></p>
+    <!-- ── EVENTS ────────────────────────────────────────────── -->
+    <section>
+      <div class="text-center mb-6">
+        <h2 class="section-heading">Events</h2>
+        <p class="section-subheading">Click Upcoming or Past to filter events</p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex gap-3 justify-center mb-8">
+        <button id="btnUpcoming" onclick="setEventsTab('upcoming')"
+                class="px-6 py-2 rounded-lg font-semibold border-2 transition-colors">
+          Upcoming
+        </button>
+        <button id="btnPast" onclick="setEventsTab('past')"
+                class="px-6 py-2 rounded-lg font-semibold border-2 transition-colors">
+          Past
+        </button>
+      </div>
+
+      <div id="eventList" class="space-y-4"></div>
+
+      <!-- ── GOOGLE CALENDAR ──────────────────────────────────── -->
+      <div class="mt-12">
+        <div class="text-center mb-4">
+          <h3 class="section-heading">Calendar</h3>
         </div>
-        <button id="dayCloseBtn" class="text-xl">✕</button>
+        <div class="rounded-xl overflow-hidden shadow border bg-white">
+          <!-- Desktop / Tablet -->
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=f624c2b1f1e05f03ad9aaac85df26153fefe166ffb5e3ad81d32ea57c156e9d8%40group.calendar.google.com&ctz=America%2FChicago"
+            class="hidden md:block w-full h-[820px] border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <!-- Mobile -->
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=f624c2b1f1e05f03ad9aaac85df26153fefe166ffb5e3ad81d32ea57c156e9d8%40group.calendar.google.com&ctz=America%2FChicago&mode=AGENDA"
+            class="block md:hidden w-full h-[720px] border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="text-center mt-3">
+          <a href="https://calendar.google.com/calendar/u/0?cid=ZjYyNGMyYjFmMWUwNWYwM2FkOWFhYWM4NWRmMjYxNTNmZWZlMTY2ZmZiNWUzYWQ4MWQzMmVhNTdjMTU2ZTlkOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+             target="_blank" rel="noopener"
+             class="text-red-600 hover:underline text-sm font-medium">
+            Open full calendar →
+          </a>
+        </div>
       </div>
+    </section>
 
-      <div class="px-6 py-6">
-        <div id="dayEventList" class="space-y-4"></div>
-        <div id="dayNoEvents" class="hidden text-gray-600 text-sm">No events scheduled.</div>
+    <hr class="section-divider">
+
+    <!-- ── MILESTONES ────────────────────────────────────────── -->
+    <section>
+      <div class="text-center mb-8">
+        <h2 class="section-heading">Milestones</h2>
+        <p class="section-subheading">Key moments in our organization's history</p>
       </div>
-    </div>
+      <div id="milestoneList" class="space-y-4"></div>
+    </section>
+
   </div>
-</div>
+</main>
 
-<!-- ================= DATA ================= -->
+<!-- FOOTER (shared — edit footer.html to change) -->
+<div id="footer-placeholder"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     ✏️ DATA — Edit the arrays below to add/change content.
+     ═══════════════════════════════════════════════════════════ -->
 <script>
+
+/* ── ANNOUNCEMENTS ────────────────────────────────────────────
+   ✏️ Add new announcements at the TOP of this array.
+   Fields: date (display string), title, text, image (optional file path)
+   ─────────────────────────────────────────────────────────── */
 const ANNOUNCEMENTS = [
   {
     date: "June 2026",
@@ -200,145 +190,197 @@ const ANNOUNCEMENTS = [
     text: "The Pulse of the Diaspora... The Strength of Lebanon\n\nBecause the cause of Lebanon deserves our unity and dedication...\nWe invite you to join us in Dallas, Texas, from November 5–8, 2026, for the 27th Annual Convention.\nRegister today: <a href=\"https://lfna.info\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-red-600 font-semibold hover:underline\">Lfna.info</a>\nThe journey continues, and we remain steadfast in our commitment to Lebanon.",
     image: "resources/convention-2026.jpg"
   },
-  { date: "2025", title: "LF USA Young Professionals Established", text: "Lebanese Forces USA Young Professionals officially launched." }
+  {
+    date: "2025",
+    title: "LF USA Young Professionals Established",
+    text: "Lebanese Forces USA Young Professionals officially launched as the official youth organization of the Lebanese Forces in the United States."
+  }
 ];
 
+/* ── EVENTS ───────────────────────────────────────────────────
+   ✏️ Add new events at the TOP of this array.
+   Fields:
+     date        — "YYYY-MM-DD" (used for Upcoming/Past sorting)
+     title       — event name
+     time        — display string for time (e.g. "7 PM Central")
+     location    — city/platform
+     description — short description
+     link        — optional URL for registration/info
+     linkLabel   — optional button label (defaults to "Learn More")
+   ─────────────────────────────────────────────────────────── */
 const EVENTS = [
   {
-    date: "2025-10-16",
-    title: "Convention",
-    time: "All Day",
-    location: "Naperville, Illinois",
-    description: "LF National Convention"
+    date: "2026-11-05",
+    title: "27th Annual LF North America Convention",
+    time: "November 5–8, 2026",
+    location: "Dallas, Texas",
+    description: "Join us in Dallas for the 27th Annual Lebanese Forces North America Convention.",
+    link: "https://lfna.info",
+    linkLabel: "Register at Lfna.info"
   },
   {
     date: "2026-04-29",
-    title: "Meeting",
+    title: "Monthly Meeting",
     time: "7 PM (Central)",
     location: "Zoom",
-    description: "Meeting"
+    description: "Monthly member meeting."
+  },
+  {
+    date: "2025-10-16",
+    title: "LF National Convention",
+    time: "All Day",
+    location: "Naperville, Illinois",
+    description: "LF National Convention – the annual gathering of Lebanese Forces North America."
   }
 ];
-  
+
+/* ── MILESTONES ───────────────────────────────────────────────
+   ✏️ Add new milestones at the TOP of this array.
+   Fields: date (display string), title, text
+   ─────────────────────────────────────────────────────────── */
 const MILESTONES = [
-  { date: "2025", title: "Organization Founded", text: "LF Youth USA established." }
+  {
+    date: "2025",
+    title: "Organization Founded",
+    text: "Lebanese Forces USA Young Professionals officially established as the official youth arm of the Lebanese Forces in the United States."
+  }
 ];
+
 </script>
 
-<!-- ================= LOGIC ================= -->
-<script>
-let showUpcoming = true;
-let currentMonth = new Date();
 
+<!-- ═══════════════════════════════════════════════════════════
+     RENDER LOGIC  — (no need to edit below this line)
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+
+/* ── Announcements ── */
 function renderAnnouncements() {
   const el = document.getElementById("announcementList");
+  if (!ANNOUNCEMENTS.length) {
+    el.innerHTML = '<p class="text-center text-gray-500 py-8">No announcements yet.</p>';
+    return;
+  }
   el.innerHTML = ANNOUNCEMENTS.map(a => `
-    <div class="bg-white rounded-xl shadow overflow-hidden">
+    <div class="card overflow-hidden">
       ${a.image ? `
-      <div class="md:flex">
-        <div class="md:w-80 flex-shrink-0">
-          <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover max-h-96 md:max-h-none">
+        <div class="md:flex">
+          <div class="md:w-80 flex-shrink-0">
+            <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover max-h-80 md:max-h-none">
+          </div>
+          <div class="p-6 flex flex-col justify-center">
+            <div class="text-xs font-semibold text-red-600 uppercase tracking-widest mb-2">${a.date}</div>
+            <h3 class="font-bold text-xl text-gray-900 mb-3">${a.title}</h3>
+            <p class="text-gray-600 leading-relaxed whitespace-pre-line">${a.text}</p>
+          </div>
         </div>
-        <div class="p-6 flex flex-col justify-center">
-          <div class="text-sm text-gray-500 mb-1">${a.date}</div>
-          <h3 class="font-bold text-xl text-red-600 mb-3">${a.title}</h3>
-          <p class="text-gray-700 leading-relaxed whitespace-pre-line">${a.text}</p>
-        </div>
-      </div>
       ` : `
-      <div class="p-6">
-        <div class="text-sm text-gray-500">${a.date}</div>
-        <h3 class="font-semibold text-lg mt-1">${a.title}</h3>
-        <p class="text-gray-700 mt-2">${a.text}</p>
-      </div>
+        <div class="p-6">
+          <div class="text-xs font-semibold text-red-600 uppercase tracking-widest mb-2">${a.date}</div>
+          <h3 class="font-semibold text-lg text-gray-900 mb-2">${a.title}</h3>
+          <p class="text-gray-600 leading-relaxed">${a.text}</p>
+        </div>
       `}
     </div>
   `).join("");
 }
 
+/* ── Events ── */
+let showUpcoming = true;
+
 function renderEvents() {
   const el = document.getElementById("eventList");
   const today = new Date().toISOString().split("T")[0];
-  const filtered = EVENTS.filter(e => showUpcoming ? e.date >= today : e.date < today);
+  const filtered = EVENTS.filter(e => showUpcoming ? e.date >= today : e.date < today)
+                         .sort((a, b) => showUpcoming
+                           ? a.date.localeCompare(b.date)   // soonest first
+                           : b.date.localeCompare(a.date)); // most recent first
+
+  if (!filtered.length) {
+    el.innerHTML = `<p class="text-center text-gray-400 py-10 text-lg">
+      ${showUpcoming ? 'No upcoming events scheduled yet — check back soon!' : 'No past events to show.'}
+    </p>`;
+    return;
+  }
+
   el.innerHTML = filtered.map(e => `
-    <div class="bg-white p-6 rounded-xl shadow">
-      <div class="text-sm text-gray-500">${e.date} ${e.time || ""}</div>
-      <h3 class="font-semibold text-lg">${e.title}</h3>
-      <p class="text-gray-600">${e.location || ""}</p>
-      <p class="text-gray-700 mt-2">${e.description || ""}</p>
+    <div class="card p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+      <!-- Date badge -->
+      <div class="flex-shrink-0 text-center bg-red-50 border border-red-100 rounded-xl px-5 py-3 w-32">
+        <div class="text-xs text-red-600 font-semibold uppercase tracking-widest">${formatEventDate(e.date, "month")}</div>
+        <div class="text-3xl font-bold text-red-600 leading-none">${formatEventDate(e.date, "day")}</div>
+        <div class="text-xs text-gray-500">${formatEventDate(e.date, "year")}</div>
+      </div>
+      <!-- Details -->
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold text-gray-900 mb-1">${e.title}</h3>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-500 mb-2">
+          ${e.time     ? `<span>🕐 ${e.time}</span>`     : ""}
+          ${e.location ? `<span>📍 ${e.location}</span>` : ""}
+        </div>
+        ${e.description ? `<p class="text-gray-600 text-sm">${e.description}</p>` : ""}
+      </div>
+      ${e.link ? `
+        <a href="${e.link}" target="_blank" rel="noopener noreferrer"
+           class="flex-shrink-0 btn-primary text-sm text-center">
+          ${e.linkLabel || "Learn More"}
+        </a>
+      ` : ""}
     </div>
   `).join("");
 }
 
+function formatEventDate(dateStr, part) {
+  try {
+    const d = new Date(dateStr + "T12:00:00"); // noon avoids timezone shifts
+    if (part === "month") return d.toLocaleString("default", { month: "short" }).toUpperCase();
+    if (part === "day")   return d.getDate();
+    if (part === "year")  return d.getFullYear();
+  } catch { return dateStr; }
+}
+
+function setEventsTab(which) {
+  showUpcoming = (which === "upcoming");
+  renderEvents();
+  const upBtn   = document.getElementById("btnUpcoming");
+  const pastBtn = document.getElementById("btnPast");
+  const active  = "bg-red-600 text-white border-red-600";
+  const inactive = "bg-white text-gray-600 border-gray-300 hover:bg-gray-50";
+  upBtn.className   = `px-6 py-2 rounded-lg font-semibold border-2 transition-colors ${showUpcoming ? active : inactive}`;
+  pastBtn.className = `px-6 py-2 rounded-lg font-semibold border-2 transition-colors ${!showUpcoming ? active : inactive}`;
+}
+
+/* ── Milestones ── */
 function renderMilestones() {
-  document.getElementById("milestoneList").innerHTML = MILESTONES.map(m => `
-    <div class="bg-white p-6 rounded-xl shadow">
-      <div class="text-sm text-gray-500">${m.date}</div>
-      <h3 class="font-semibold text-lg">${m.title}</h3>
-      <p class="text-gray-700 mt-2">${m.text}</p>
+  const el = document.getElementById("milestoneList");
+  if (!MILESTONES.length) {
+    el.innerHTML = '<p class="text-center text-gray-500 py-8">No milestones yet.</p>';
+    return;
+  }
+  el.innerHTML = MILESTONES.map(m => `
+    <div class="card p-6 flex gap-4 items-start">
+      <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
+        <span class="text-red-600 text-lg">🏛</span>
+      </div>
+      <div>
+        <div class="text-xs font-semibold text-red-600 uppercase tracking-widest mb-1">${m.date}</div>
+        <h3 class="font-semibold text-gray-900 mb-1">${m.title}</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">${m.text}</p>
+      </div>
     </div>
   `).join("");
 }
 
+/* ── Init ── */
 renderAnnouncements();
-renderEvents();
+setEventsTab("upcoming"); // renders events + styles buttons
 renderMilestones();
+
 </script>
 
 <!-- Scripts -->
 <script src="page-init.js"></script>
 <script src="config-loader.js"></script>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const upAll = document.querySelectorAll("#btnUpcoming");
-    const pastAll = document.querySelectorAll("#btnPast");
-
-    // If duplicates exist, this will still bind the first pair
-    const btnUpcoming = upAll[0];
-    const btnPast = pastAll[0];
-
-    console.log("btnUpcoming count:", upAll.length, "btnPast count:", pastAll.length);
-
-    if (!btnUpcoming || !btnPast) return;
-
-    function forceActive(btn, active) {
-      if (active) {
-        btn.style.setProperty("background-color", "#dc2626", "important"); // red-600
-        btn.style.setProperty("color", "#ffffff", "important");
-        btn.style.setProperty("border", "1px solid #dc2626", "important");
-      } else {
-        btn.style.setProperty("background-color", "transparent", "important");
-        btn.style.setProperty("color", "#dc2626", "important");
-        btn.style.setProperty("border", "1px solid #dc2626", "important");
-      }
-      btn.style.setProperty("border-radius", "0.5rem", "important");
-      btn.style.setProperty("padding", "0.5rem 1.25rem", "important");
-      btn.style.setProperty("font-weight", "600", "important");
-    }
-
-    function setActive(which) {
-      forceActive(btnUpcoming, which === "upcoming");
-      forceActive(btnPast, which === "past");
-    }
-
-    btnUpcoming.addEventListener("click", () => {
-      showUpcoming = true;
-      renderEvents();
-      setActive("upcoming");
-    });
-
-    btnPast.addEventListener("click", () => {
-      showUpcoming = false;
-      renderEvents();
-      setActive("past");
-    });
-
-    setActive("upcoming");
-  });
-  </script>
-
-<!-- FOOTER (shared — edit footer.html to change) -->
-<div id="footer-placeholder"></div>
 
 </body>
 </html>
