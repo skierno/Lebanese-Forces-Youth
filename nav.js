@@ -1,25 +1,25 @@
 (function () {
   function initNav() {
+
+    /* ── Mobile Menu ──────────────────────────────────────────────────── */
     const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileMenu    = document.getElementById("mobileMenu");
 
     if (!mobileMenuBtn || !mobileMenu) {
       console.warn("[nav.js] Missing #mobileMenuBtn or #mobileMenu");
       return;
     }
 
-    // Prevent double-binding if nav is injected more than once
+    // Prevent double-binding if nav.js is somehow loaded twice
     if (mobileMenuBtn.dataset.bound === "1") return;
     mobileMenuBtn.dataset.bound = "1";
 
-    // Toggle menu
     mobileMenuBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       mobileMenu.classList.toggle("active");
     });
 
-    // Close on outside click
     document.addEventListener("click", (e) => {
       if (
         mobileMenu.classList.contains("active") &&
@@ -30,13 +30,22 @@
       }
     });
 
-    // Keep clicks inside menu from closing it
+    // Clicks inside the menu don't close it
     mobileMenu.addEventListener("click", (e) => e.stopPropagation());
 
-    console.log("[nav.js] Mobile menu bound ✅");
+    /* ── Active Page Highlighting ─────────────────────────────────────── */
+    // Marks the current page's nav link with the "active" class
+    const page = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".nav-link").forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && (href === page || (page === "" && href === "index.html"))) {
+        link.classList.add("active");
+      }
+    });
+
+    console.log("[nav.js] Nav initialized ✅");
   }
 
-  // Run immediately if DOM is already ready (common with injected nav)
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initNav);
   } else {

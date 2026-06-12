@@ -1,0 +1,2 @@
+- [Shared nav/footer/init pattern](shared-components.md) — all pages use page-init.js + footer.html; editing one file updates the whole site.
+- [Nav double-bind root cause](nav-double-bind.md) — old pages had both inline mobileMenuBtn JS AND a duplicate nav fetch block; both caused null-reference crashes before nav was injected.

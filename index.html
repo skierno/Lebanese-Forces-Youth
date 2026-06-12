@@ -1,382 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <link rel="stylesheet" href="site.css">
-    <!-- Favicon -->
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon_io/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-    <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="stylesheet" href="site.css">
 
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lebanese Forces Youth USA - Official Website</title>
-    <meta name="description" content="Lebanese Forces USA Young Professionals Official Website, Lebanon's largest Christian political party youth movement – advocating for sovereignty, democracy, and a strong Lebanese state.">
-    <!-- Open Graph (WhatsApp, Facebook, iMessage, Discord) -->
-    <meta property="og:title" content="Lebanese Forces USA Young Professionals - Official Website">
-    <meta property="og:description" content="Lebanese Forces USA Young Professionals Official Website, Lebanon's largest Christian political party youth movement – advocating for sovereignty, democracy, and a strong Lebanese state.">
-    <meta property="og:image" content="https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png">
-    <meta property="og:url" content="https://lebaneseforcesyouthusa.com/">
-    <meta property="og:type" content="website">
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon_io/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
 
-    <!-- Twitter / X (also used by many apps) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Lebanese Forces USA Young Professionals – Official Website">
-    <meta name="twitter:description" content="Lebanese Forces USA Young Professionals Website, Lebanon's largest Christian political party youth movement – advocating for sovereignty, democracy, and a strong Lebanese state.">
-    <meta name="twitter:image" content="https://lebaneseforcesyouthusa.com/resources/Graph.jpeg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lebanese Forces Youth USA – Official Website</title>
+  <meta name="description" content="Lebanese Forces USA Young Professionals – Lebanon's largest Christian political party youth movement advocating for sovereignty, democracy, and a strong Lebanese state.">
 
-    <!-- Organization logo for Google -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Lebanese Forces USA Young Professionals",
-      "url": "https://lebaneseforcesyouthusa.com/",
-      "logo": "https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png"
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Lebanese Forces USA Young Professionals – Official Website">
+  <meta property="og:description" content="Lebanon's largest Christian political party youth movement advocating for sovereignty, democracy, and a strong Lebanese state.">
+  <meta property="og:image"       content="https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png">
+  <meta property="og:url"         content="https://lebaneseforcesyouthusa.com/">
+  <meta property="og:type"        content="website">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Lebanese Forces USA Young Professionals – Official Website">
+  <meta name="twitter:description" content="Lebanon's largest Christian political party youth movement advocating for sovereignty, democracy, and a strong Lebanese state.">
+  <meta name="twitter:image"       content="https://lebaneseforcesyouthusa.com/resources/Graph.jpeg">
+
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lebanese Forces USA Young Professionals",
+    "url": "https://lebaneseforcesyouthusa.com/",
+    "logo": "https://lebaneseforcesyouthusa.com/resources/logoLF-modified.png"
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cedar-red':          '#DC143C',
+            'cedar-green':        '#228B22',
+            'phoenix-gold':       '#FFD700',
+            'mediterranean-blue': '#1a2332'
+          }
+        }
+      }
     }
-    </script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'cedar-red': '#DC143C',
-                        'cedar-green': '#228B22',
-                        'phoenix-gold': '#FFD700',
-                        'mediterranean-blue': '#1a2332'
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        
-        .hero-bg {
-            background: linear-gradient(135deg, #DC143C, #228B22);
-        }
-        
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .arabic-text {
-            font-family: 'Amiri', 'Traditional Arabic', serif;
-            direction: rtl;
-            text-align: right;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        /* Desktop Navigation must override hidden class at md breakpoint */
-        @media (min-width: 768px) {
-            .hidden.md\:flex {
-                display: flex !important;
-            }
-        }
-        
-        /* Ensure navigation is always visible */
-        nav {
-            position: fixed !important;
-            top: 0 !important;
-            width: 100% !important;
-            z-index: 1000 !important;
-        }
-        
-        /* Ensure content doesn't hide behind nav */
-        body {
-            padding-top: 70px;
-        }
-        
-        /* Mobile menu styles */
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .mobile-menu.active {
-            transform: translateX(0);
-        }
-    </style>
+  </script>
 </head>
-<body class="bg-gray-50">
-    <!-- ================= NAVIGATION ================= -->
-    <div id="nav-placeholder"></div>
+<body>
 
-    <!-- Hero Section -->
-                <section class="bg-gradient-to-r from-red-600 to-red-800 text-white text-center py-20">
+<!-- NAV (shared — edit nav.html to change) -->
+<div id="nav-placeholder"></div>
 
-                  <!-- Logo -->
-                  <div class="flex justify-center mb-6">
-                    <img
-                      src="resources/logoLF-modified.png"
-                      alt="Lebanese Forces Youth USA Logo"
-                      class="w-32 h-32 object-contain"
-                    >
-                  </div>
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+     ✏️ EDIT: Change headline, subtitle, or button links below
+     ═══════════════════════════════════════════════════════════ -->
+<section class="bg-gradient-to-r from-red-600 to-red-800 text-white text-center py-24">
+  <div class="max-w-4xl mx-auto px-6">
 
-                  <!-- Title -->
-                  <h1 class="text-4xl md:text-5xl font-bold">
-                      Lebanese Forces USA Young Professionals
-                  </h1>
+    <div class="flex justify-center mb-6">
+      <img src="resources/logoLF-modified.png"
+           alt="Lebanese Forces Youth USA Logo"
+           class="w-28 h-28 object-contain drop-shadow-lg">
+    </div>
 
-                  <!-- Subtitle -->
-                    <p class="text-lg md:text-xl mb-6 mt-4 max-w-3xl mx-auto">
-                      Official Website for Lebanon's largest Christian political party youth movement – advocating for sovereignty, democracy, and a strong Lebanese state
-                    </p>
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+      Lebanese Forces USA Young Professionals
+    </h1>
 
+    <p class="text-lg md:text-xl mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed">
+      Official Website for Lebanon's largest Christian political party youth movement –
+      advocating for sovereignty, democracy, and a strong Lebanese state
+    </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="join.html" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors">
-                        Join LF USA Young Professionals!
-                    </a>
-                    <a href="youth.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:text-red-600 transition-colors">
-                        Who are we?
-                    </a>
-                </div>
-            </div>
+    <!-- ✏️ EDIT: Change button text or links -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="join.html"  class="btn-primary">Join LF USA Young Professionals!</a>
+      <a href="youth.html" class="btn-outline">Who are we?</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     QUICK-ACCESS CARDS
+     ✏️ EDIT: Change card title, description, or link href
+     ═══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-12">
+      <h2 class="section-heading">Learn About Lebanese Forces</h2>
+      <p class="section-subheading">
+        Comprehensive educational resources about Lebanon's largest Christian political party
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card: Timeline -->
+      <a href="timeline.html" class="card p-6 block">
+        <div class="icon-circle bg-red-50 mb-4">
+          <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
         </div>
-    </section>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Historical Timeline</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Complete history from 1976 formation through present day, including all major wars and political developments.
+        </p>
+        <span class="text-red-600 font-semibold text-sm">View Timeline →</span>
+      </a>
 
-    <!-- Main Content -->
-    <main class="py-16">
-        <!-- Quick Access -->
-        <section class="max-w-7xl mx-auto px-4 mb-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-red-600 mb-4">Learn About Lebanese Forces</h2>
-                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
-                    Comprehensive educational resources about Lebanon's largest Christian political party
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Timeline Card -->
-                <a href="timeline.html" class="card-hover bg-gray-50 p-6 rounded-xl block">
-                    <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">Historical Timeline</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
-                        Complete history from 1976 formation through present day, including all major wars and political developments.
-                    </p>
-                    <span class="text-red-600 font-semibold text-sm">View Timeline →</span>
-                </a>
-                
-                <!-- Comparison Card -->
-                <a href="youth.html" class="card-hover bg-gray-50 p-6 rounded-xl block">
-                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">See Who We Are</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
-                       See what the Lebanese Forces USA Young Professionals is all about and see our events and videos.
-                    </p>
-                    <span class="text-red-600 font-semibold text-sm">Who We Are →</span>
-                </a>
-                
-                <!-- News Card -->
-                <a href="https://lebanese-forces-intishar.com/" rel="noopener noreferrer" target="_blank" class="card-hover bg-gray-50 p-6 rounded-xl block nav-link">
-                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">News & Resources</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm mb-4">
-                        Stay updated with current political developments and access educational materials.
-                    </p>
-                    <span class="text-red-600 font-semibold text-sm">View News →</span>
-                </a>
-            </div>
-        </section>
+      <!-- Card: Who We Are -->
+      <a href="youth.html" class="card p-6 block">
+        <div class="icon-circle bg-green-50 mb-4">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">See Who We Are</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          See what the Lebanese Forces USA Young Professionals is all about and see our events and videos.
+        </p>
+        <span class="text-red-600 font-semibold text-sm">Who We Are →</span>
+      </a>
 
-        <!-- Key Events -->
-        <section class="max-w-7xl mx-auto px-4 mb-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-red-600 mb-4">Key Historical Events</h2>
-                <p class="text-lg text-gray-600 max-w-4xl mx-auto">
-                    Important milestones in Lebanese Forces history
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">1976 - Formation</h3>
-                    <p class="text-gray-600 text-sm mb-4">Bashir Gemayel unifies Christian militias into the Lebanese Forces during the Lebanese Civil War.</p>
-                    <span class="text-xs text-gray-500">Beirut, Lebanon</span>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">1982 - Bashir Elected President</h3>
-                    <p class="text-gray-600 text-sm mb-4">Bashir Gemayel elected President of Lebanon, representing peak of LF political influence.</p>
-                    <span class="text-xs text-gray-500">Beirut, Lebanon</span>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">1986 - Samir Geagea Leadership</h3>
-                    <p class="text-gray-600 text-sm mb-4">Samir Geagea assumes leadership after internal power struggles, beginning long-term leadership.</p>
-                    <span class="text-xs text-gray-500">Lebanon</span>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h3 class="text-xl font-semibold text-red-600 mb-3">2005 - Cedar Revolution</h3>
-                    <p class="text-gray-600 text-sm mb-4">Samir Geagea released from prison after 11 years. LF re-legalized and re-emerges as major political force.</p>
-                    <span class="text-xs text-gray-500">Beirut, Lebanon</span>
-                </div>
-            </div>
-        </section>
+      <!-- Card: News -->
+      <a href="https://lebanese-forces-intishar.com/" rel="noopener noreferrer" target="_blank" class="card p-6 block">
+        <div class="icon-circle bg-blue-50 mb-4">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">News & Resources</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+          Stay updated with current political developments and access educational materials.
+        </p>
+        <span class="text-red-600 font-semibold text-sm">View News →</span>
+      </a>
 
-        <!-- Call to Action -->
-        <section class="max-w-4xl mx-auto px-4 text-center mb-16">
-            <h2 class="text-3xl font-bold text-red-600 mb-6">
-                Ready to Learn More?
-            </h2>
-            <p class="text-lg text-gray-600 mb-8">
-                Explore our comprehensive educational resources and join the movement for a sovereign Lebanon.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="join.html" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-red-700 transition-colors">
-                    Join Lebanese Forces USA Young Professionals
-                </a>
-                <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all">
-                    Follow Our Instagram
-                </a>
-            </div>
-        </section>
-    </main>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-          <div class="max-w-7xl mx-auto px-4 text-center">
-                  <div class="flex flex-col items-center justify-center mb-6">
-                      <img
-                          src="resources/logoLF-modified.png"
-                          alt="Lebanese Forces Youth USA Logo"
-                          class="w-16 h-16 object-contain mb-3"
-                        >
-                  <h3 class="text-lg font-semibold">Lebanese Forces USA Young Professionals - Official Website of the Lebanese Forces USA Young Professionals</h3>
-              </div>
-              <p class="text-gray-300 mb-4 text-sm">
-                Official Website of the Lebanese Forces USA Young Professionals for understanding Lebanese politics and the role of the Lebanese Forces USA Young Professionals movement 
-              </p>
-              <div class="flex justify-center space-x-4 mb-4">
-                  <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-red-400 to-red-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
-                      Follow on Instagram
-                  </a>
-                  <a href="https://www.facebook.com/lebanese.forces.usa.youth.offiical.page/" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-red-800 to-red-400 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
-                        Follow on Facebook
-                    </a>
-              </div>
-              <p class="text-xs text-gray-400">
-                  © 2026 Lebanese Forces USA Young Professionals. Created by Joseph Sleiman.
-              </p>
-          </div>
-      </footer>
-    <!-- Config Loader Script -->
-    <script src="config-loader.js"></script>
-    
-    
-    <!-- JavaScript -->
-    <script>
-        fetch("nav.html")
-          .then(r => r.text())
-          .then(html => {
-            document.getElementById("nav-placeholder").innerHTML = html;
+<hr class="section-divider">
 
-            // Load mobile menu behavior (your nav.js)
-            const navScript = document.createElement("script");
-            navScript.src = "nav.js";
-            document.body.appendChild(navScript);
+<!-- ═══════════════════════════════════════════════════════════
+     KEY HISTORICAL EVENTS
+     ✏️ EDIT: Change year labels, titles, descriptions, or locations
+     ═══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
 
-            // Google Translate init
-            window.googleTranslateElementInit = function () {
-              new google.translate.TranslateElement(
-                { pageLanguage: "en", includedLanguages: "en,ar", autoDisplay: false },
-                "google_translate_element"
-              );
-            };
+    <div class="text-center mb-12">
+      <h2 class="section-heading">Key Historical Events</h2>
+      <p class="section-subheading">Important milestones in Lebanese Forces history</p>
+    </div>
 
-            const gt = document.createElement("script");
-            gt.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-            document.body.appendChild(gt);
+    <div class="grid md:grid-cols-2 gap-6">
 
-            // Wire YOUR button after Google creates the select
-            const langToggle = document.getElementById("langToggle");
-            const currentLang = document.getElementById("currentLang");
+      <div class="card p-6">
+        <div class="text-xs font-bold text-red-600 uppercase tracking-widest mb-2">1976</div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Formation</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Bashir Gemayel unifies Christian militias into the Lebanese Forces during the Lebanese Civil War.
+        </p>
+        <div class="mt-4 text-xs text-gray-400">Beirut, Lebanon</div>
+      </div>
 
-            function setLanguage(lang) {
-              const select = document.querySelector("select.goog-te-combo");
-              if (!select) return false;
+      <div class="card p-6">
+        <div class="text-xs font-bold text-red-600 uppercase tracking-widest mb-2">1982</div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Bashir Elected President</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Bashir Gemayel elected President of Lebanon, representing peak of LF political influence.
+        </p>
+        <div class="mt-4 text-xs text-gray-400">Beirut, Lebanon</div>
+      </div>
 
-              select.value = lang;
-              select.dispatchEvent(new Event("change"));
+      <div class="card p-6">
+        <div class="text-xs font-bold text-red-600 uppercase tracking-widest mb-2">1986</div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Samir Geagea Leadership</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Samir Geagea assumes leadership after internal power struggles, beginning long-term leadership.
+        </p>
+        <div class="mt-4 text-xs text-gray-400">Lebanon</div>
+      </div>
 
-              localStorage.setItem("siteLang", lang);
-              if (currentLang) currentLang.textContent = (lang === "ar") ? "العربية" : "English";
-              return true;
-            }
+      <div class="card p-6">
+        <div class="text-xs font-bold text-red-600 uppercase tracking-widest mb-2">2005</div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Cedar Revolution</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">
+          Samir Geagea released from prison after 11 years. LF re-legalized and re-emerges as major political force.
+        </p>
+        <div class="mt-4 text-xs text-gray-400">Beirut, Lebanon</div>
+      </div>
 
-            function waitForGoogleSelectAndBind() {
-              let tries = 0;
-              const timer = setInterval(() => {
-                tries++;
-                const select = document.querySelector("select.goog-te-combo");
+    </div>
+  </div>
+</section>
 
-                if (select) {
-                  clearInterval(timer);
+<hr class="section-divider">
 
-                  // Restore saved language
-                  const saved = localStorage.getItem("siteLang");
-                  if (saved) setLanguage(saved);
+<!-- ═══════════════════════════════════════════════════════════
+     CALL TO ACTION
+     ✏️ EDIT: Change headline, body text, or button links
+     ═══════════════════════════════════════════════════════════ -->
+<section class="py-20 bg-white">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <h2 class="section-heading">Ready to Learn More?</h2>
+    <p class="section-subheading mb-8">
+      Explore our comprehensive educational resources and join the movement for a sovereign Lebanon.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="join.html" class="btn-primary">Join Lebanese Forces USA Young Professionals</a>
+      <a href="https://www.instagram.com/lebanese.forces.usa.youth?igsh=NTc4MTIwNjQ2YQ=="
+         target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white px-7 py-3 rounded-lg font-semibold hover:shadow-lg transition-all">
+        Follow Our Instagram
+      </a>
+    </div>
+  </div>
+</section>
 
-                  // Click handler
-                  if (langToggle) {
-                    langToggle.addEventListener("click", () => {
-                      const next = (localStorage.getItem("siteLang") === "ar") ? "en" : "ar";
-                      setLanguage(next);
-                    });
-                  }
-                }
+<!-- FOOTER (shared — edit footer.html to change) -->
+<div id="footer-placeholder"></div>
 
-                if (tries > 60) clearInterval(timer); // ~6 seconds max
-              }, 100);
-            }
-
-            waitForGoogleSelectAndBind();
-          });
-        // ----- Detect Google Translate bar and adjust nav -----
-        (function detectGoogleBar() {
-          const check = setInterval(() => {
-            const bar = document.querySelector(".goog-te-banner-frame");
-            if (bar) {
-              document.body.classList.add("has-google-bar");
-              clearInterval(check);
-            }
-          }, 100);
-        })();
-
-        </script>
+<!-- Scripts -->
+<script src="page-init.js"></script>
+<script src="config-loader.js"></script>
 
 </body>
 </html>
