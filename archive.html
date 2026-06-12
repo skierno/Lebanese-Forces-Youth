@@ -194,6 +194,12 @@
 <!-- ================= DATA ================= -->
 <script>
 const ANNOUNCEMENTS = [
+  {
+    date: "June 2026",
+    title: "27th Annual Convention – Dallas, Texas",
+    text: "The Pulse of the Diaspora... The Strength of Lebanon\n\nBecause the cause of Lebanon deserves our unity and dedication...\nWe invite you to join us in Dallas, Texas, from November 5–8, 2026, for the 27th Annual Convention.\nRegister today: Lfna.info\nThe journey continues, and we remain steadfast in our commitment to Lebanon.",
+    image: "resources/convention-2026.jpg"
+  },
   { date: "2025", title: "LF USA Young Professionals Established", text: "Lebanese Forces USA Young Professionals officially launched." }
 ];
 
@@ -227,10 +233,25 @@ let currentMonth = new Date();
 function renderAnnouncements() {
   const el = document.getElementById("announcementList");
   el.innerHTML = ANNOUNCEMENTS.map(a => `
-    <div class="bg-white p-6 rounded-xl shadow">
-      <div class="text-sm text-gray-500">${a.date}</div>
-      <h3 class="font-semibold text-lg mt-1">${a.title}</h3>
-      <p class="text-gray-700 mt-2">${a.text}</p>
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+      ${a.image ? `
+      <div class="md:flex">
+        <div class="md:w-80 flex-shrink-0">
+          <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover max-h-96 md:max-h-none">
+        </div>
+        <div class="p-6 flex flex-col justify-center">
+          <div class="text-sm text-gray-500 mb-1">${a.date}</div>
+          <h3 class="font-bold text-xl text-red-600 mb-3">${a.title}</h3>
+          <p class="text-gray-700 leading-relaxed whitespace-pre-line">${a.text}</p>
+        </div>
+      </div>
+      ` : `
+      <div class="p-6">
+        <div class="text-sm text-gray-500">${a.date}</div>
+        <h3 class="font-semibold text-lg mt-1">${a.title}</h3>
+        <p class="text-gray-700 mt-2">${a.text}</p>
+      </div>
+      `}
     </div>
   `).join("");
 }
